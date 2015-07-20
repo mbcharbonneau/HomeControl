@@ -1,0 +1,678 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481913201B5DBFDD00C8DB14 /* AppDelegate.swift */; };
+		481913231B5DBFDD00C8DB14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481913221B5DBFDD00C8DB14 /* ViewController.swift */; };
+		481913261B5DBFDD00C8DB14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481913241B5DBFDD00C8DB14 /* Main.storyboard */; };
+		481913281B5DBFDD00C8DB14 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 481913271B5DBFDD00C8DB14 /* Images.xcassets */; };
+		4819132B1B5DBFDD00C8DB14 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */; };
+		481913371B5DBFDD00C8DB14 /* Monster_PitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481913361B5DBFDD00C8DB14 /* Monster_PitTests.swift */; };
+		4819134A1B5DC0AF00C8DB14 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481913491B5DC0AF00C8DB14 /* InterfaceController.swift */; };
+		4819134C1B5DC0AF00C8DB14 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819134B1B5DC0AF00C8DB14 /* NotificationController.swift */; };
+		4819134E1B5DC0AF00C8DB14 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4819134D1B5DC0AF00C8DB14 /* Images.xcassets */; };
+		481913521B5DC0AF00C8DB14 /* Monster Pit WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 481913511B5DC0AF00C8DB14 /* Monster Pit WatchKit App.app */; };
+		4819135A1B5DC0AF00C8DB14 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481913581B5DC0AF00C8DB14 /* Interface.storyboard */; };
+		4819135C1B5DC0AF00C8DB14 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4819135B1B5DC0AF00C8DB14 /* Images.xcassets */; };
+		4819135F1B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 481913441B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		481913311B5DBFDD00C8DB14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 481913131B5DBFDD00C8DB14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4819131A1B5DBFDD00C8DB14;
+			remoteInfo = "Monster Pit";
+		};
+		481913531B5DC0AF00C8DB14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 481913131B5DBFDD00C8DB14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 481913501B5DC0AF00C8DB14;
+			remoteInfo = "Monster Pit WatchKit App";
+		};
+		4819135D1B5DC0AF00C8DB14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 481913131B5DBFDD00C8DB14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 481913431B5DC0AF00C8DB14;
+			remoteInfo = "Monster Pit WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		481913661B5DC0AF00C8DB14 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4819135F1B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4819131B1B5DBFDD00C8DB14 /* Monster Pit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monster Pit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4819131F1B5DBFDD00C8DB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		481913201B5DBFDD00C8DB14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		481913221B5DBFDD00C8DB14 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		481913251B5DBFDD00C8DB14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		481913271B5DBFDD00C8DB14 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4819132A1B5DBFDD00C8DB14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		481913301B5DBFDD00C8DB14 /* Monster PitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Monster PitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		481913351B5DBFDD00C8DB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		481913361B5DBFDD00C8DB14 /* Monster_PitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster_PitTests.swift; sourceTree = "<group>"; };
+		481913441B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Monster Pit WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		481913471B5DC0AF00C8DB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		481913481B5DC0AF00C8DB14 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		481913491B5DC0AF00C8DB14 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		4819134B1B5DC0AF00C8DB14 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		4819134D1B5DC0AF00C8DB14 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		481913511B5DC0AF00C8DB14 /* Monster Pit WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monster Pit WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		481913571B5DC0AF00C8DB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		481913591B5DC0AF00C8DB14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		4819135B1B5DC0AF00C8DB14 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		481913181B5DBFDD00C8DB14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4819132D1B5DBFDD00C8DB14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		481913411B5DC0AF00C8DB14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		481913121B5DBFDD00C8DB14 = {
+			isa = PBXGroup;
+			children = (
+				4819131D1B5DBFDD00C8DB14 /* Monster Pit */,
+				481913331B5DBFDD00C8DB14 /* Monster PitTests */,
+				481913451B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension */,
+				481913551B5DC0AF00C8DB14 /* Monster Pit WatchKit App */,
+				4819131C1B5DBFDD00C8DB14 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4819131C1B5DBFDD00C8DB14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4819131B1B5DBFDD00C8DB14 /* Monster Pit.app */,
+				481913301B5DBFDD00C8DB14 /* Monster PitTests.xctest */,
+				481913441B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension.appex */,
+				481913511B5DC0AF00C8DB14 /* Monster Pit WatchKit App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4819131D1B5DBFDD00C8DB14 /* Monster Pit */ = {
+			isa = PBXGroup;
+			children = (
+				481913201B5DBFDD00C8DB14 /* AppDelegate.swift */,
+				481913221B5DBFDD00C8DB14 /* ViewController.swift */,
+				481913241B5DBFDD00C8DB14 /* Main.storyboard */,
+				481913271B5DBFDD00C8DB14 /* Images.xcassets */,
+				481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */,
+				4819131E1B5DBFDD00C8DB14 /* Supporting Files */,
+			);
+			path = "Monster Pit";
+			sourceTree = "<group>";
+		};
+		4819131E1B5DBFDD00C8DB14 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4819131F1B5DBFDD00C8DB14 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		481913331B5DBFDD00C8DB14 /* Monster PitTests */ = {
+			isa = PBXGroup;
+			children = (
+				481913361B5DBFDD00C8DB14 /* Monster_PitTests.swift */,
+				481913341B5DBFDD00C8DB14 /* Supporting Files */,
+			);
+			path = "Monster PitTests";
+			sourceTree = "<group>";
+		};
+		481913341B5DBFDD00C8DB14 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				481913351B5DBFDD00C8DB14 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		481913451B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				481913491B5DC0AF00C8DB14 /* InterfaceController.swift */,
+				4819134B1B5DC0AF00C8DB14 /* NotificationController.swift */,
+				4819134D1B5DC0AF00C8DB14 /* Images.xcassets */,
+				481913461B5DC0AF00C8DB14 /* Supporting Files */,
+			);
+			path = "Monster Pit WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		481913461B5DC0AF00C8DB14 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				481913471B5DC0AF00C8DB14 /* Info.plist */,
+				481913481B5DC0AF00C8DB14 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		481913551B5DC0AF00C8DB14 /* Monster Pit WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				481913581B5DC0AF00C8DB14 /* Interface.storyboard */,
+				4819135B1B5DC0AF00C8DB14 /* Images.xcassets */,
+				481913561B5DC0AF00C8DB14 /* Supporting Files */,
+			);
+			path = "Monster Pit WatchKit App";
+			sourceTree = "<group>";
+		};
+		481913561B5DC0AF00C8DB14 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				481913571B5DC0AF00C8DB14 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4819131A1B5DBFDD00C8DB14 /* Monster Pit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4819133A1B5DBFDD00C8DB14 /* Build configuration list for PBXNativeTarget "Monster Pit" */;
+			buildPhases = (
+				481913171B5DBFDD00C8DB14 /* Sources */,
+				481913181B5DBFDD00C8DB14 /* Frameworks */,
+				481913191B5DBFDD00C8DB14 /* Resources */,
+				481913661B5DC0AF00C8DB14 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4819135E1B5DC0AF00C8DB14 /* PBXTargetDependency */,
+			);
+			name = "Monster Pit";
+			productName = "Monster Pit";
+			productReference = 4819131B1B5DBFDD00C8DB14 /* Monster Pit.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4819132F1B5DBFDD00C8DB14 /* Monster PitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4819133D1B5DBFDD00C8DB14 /* Build configuration list for PBXNativeTarget "Monster PitTests" */;
+			buildPhases = (
+				4819132C1B5DBFDD00C8DB14 /* Sources */,
+				4819132D1B5DBFDD00C8DB14 /* Frameworks */,
+				4819132E1B5DBFDD00C8DB14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				481913321B5DBFDD00C8DB14 /* PBXTargetDependency */,
+			);
+			name = "Monster PitTests";
+			productName = "Monster PitTests";
+			productReference = 481913301B5DBFDD00C8DB14 /* Monster PitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		481913431B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 481913631B5DC0AF00C8DB14 /* Build configuration list for PBXNativeTarget "Monster Pit WatchKit Extension" */;
+			buildPhases = (
+				481913401B5DC0AF00C8DB14 /* Sources */,
+				481913411B5DC0AF00C8DB14 /* Frameworks */,
+				481913421B5DC0AF00C8DB14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				481913541B5DC0AF00C8DB14 /* PBXTargetDependency */,
+			);
+			name = "Monster Pit WatchKit Extension";
+			productName = "Monster Pit WatchKit Extension";
+			productReference = 481913441B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		481913501B5DC0AF00C8DB14 /* Monster Pit WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 481913601B5DC0AF00C8DB14 /* Build configuration list for PBXNativeTarget "Monster Pit WatchKit App" */;
+			buildPhases = (
+				4819134F1B5DC0AF00C8DB14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Monster Pit WatchKit App";
+			productName = "Monster Pit WatchKit App";
+			productReference = 481913511B5DC0AF00C8DB14 /* Monster Pit WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		481913131B5DBFDD00C8DB14 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Downtown Software House";
+				TargetAttributes = {
+					4819131A1B5DBFDD00C8DB14 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					4819132F1B5DBFDD00C8DB14 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 4819131A1B5DBFDD00C8DB14;
+					};
+					481913431B5DC0AF00C8DB14 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					481913501B5DC0AF00C8DB14 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 481913161B5DBFDD00C8DB14 /* Build configuration list for PBXProject "Monster Pit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 481913121B5DBFDD00C8DB14;
+			productRefGroup = 4819131C1B5DBFDD00C8DB14 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4819131A1B5DBFDD00C8DB14 /* Monster Pit */,
+				4819132F1B5DBFDD00C8DB14 /* Monster PitTests */,
+				481913431B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension */,
+				481913501B5DC0AF00C8DB14 /* Monster Pit WatchKit App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		481913191B5DBFDD00C8DB14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				481913261B5DBFDD00C8DB14 /* Main.storyboard in Resources */,
+				4819132B1B5DBFDD00C8DB14 /* LaunchScreen.xib in Resources */,
+				481913281B5DBFDD00C8DB14 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4819132E1B5DBFDD00C8DB14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		481913421B5DC0AF00C8DB14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				481913521B5DC0AF00C8DB14 /* Monster Pit WatchKit App.app in Resources */,
+				4819134E1B5DC0AF00C8DB14 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4819134F1B5DC0AF00C8DB14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4819135A1B5DC0AF00C8DB14 /* Interface.storyboard in Resources */,
+				4819135C1B5DC0AF00C8DB14 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		481913171B5DBFDD00C8DB14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				481913231B5DBFDD00C8DB14 /* ViewController.swift in Sources */,
+				481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4819132C1B5DBFDD00C8DB14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				481913371B5DBFDD00C8DB14 /* Monster_PitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		481913401B5DC0AF00C8DB14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4819134C1B5DC0AF00C8DB14 /* NotificationController.swift in Sources */,
+				4819134A1B5DC0AF00C8DB14 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		481913321B5DBFDD00C8DB14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4819131A1B5DBFDD00C8DB14 /* Monster Pit */;
+			targetProxy = 481913311B5DBFDD00C8DB14 /* PBXContainerItemProxy */;
+		};
+		481913541B5DC0AF00C8DB14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 481913501B5DC0AF00C8DB14 /* Monster Pit WatchKit App */;
+			targetProxy = 481913531B5DC0AF00C8DB14 /* PBXContainerItemProxy */;
+		};
+		4819135E1B5DC0AF00C8DB14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 481913431B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension */;
+			targetProxy = 4819135D1B5DC0AF00C8DB14 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		481913241B5DBFDD00C8DB14 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				481913251B5DBFDD00C8DB14 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4819132A1B5DBFDD00C8DB14 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		481913581B5DC0AF00C8DB14 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				481913591B5DC0AF00C8DB14 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		481913381B5DBFDD00C8DB14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		481913391B5DBFDD00C8DB14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4819133B1B5DBFDD00C8DB14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Monster Pit/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4819133C1B5DBFDD00C8DB14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Monster Pit/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		4819133E1B5DBFDD00C8DB14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Monster PitTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Monster Pit.app/Monster Pit";
+			};
+			name = Debug;
+		};
+		4819133F1B5DBFDD00C8DB14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Monster PitTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Monster Pit.app/Monster Pit";
+			};
+			name = Release;
+		};
+		481913611B5DC0AF00C8DB14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = Monster_Pit_WatchKit_Extension;
+				INFOPLIST_FILE = "Monster Pit WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		481913621B5DC0AF00C8DB14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				IBSC_MODULE = Monster_Pit_WatchKit_Extension;
+				INFOPLIST_FILE = "Monster Pit WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		481913641B5DC0AF00C8DB14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Monster Pit WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		481913651B5DC0AF00C8DB14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Monster Pit WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		481913161B5DBFDD00C8DB14 /* Build configuration list for PBXProject "Monster Pit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				481913381B5DBFDD00C8DB14 /* Debug */,
+				481913391B5DBFDD00C8DB14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4819133A1B5DBFDD00C8DB14 /* Build configuration list for PBXNativeTarget "Monster Pit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4819133B1B5DBFDD00C8DB14 /* Debug */,
+				4819133C1B5DBFDD00C8DB14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4819133D1B5DBFDD00C8DB14 /* Build configuration list for PBXNativeTarget "Monster PitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4819133E1B5DBFDD00C8DB14 /* Debug */,
+				4819133F1B5DBFDD00C8DB14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		481913601B5DC0AF00C8DB14 /* Build configuration list for PBXNativeTarget "Monster Pit WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				481913611B5DC0AF00C8DB14 /* Debug */,
+				481913621B5DC0AF00C8DB14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		481913631B5DC0AF00C8DB14 /* Build configuration list for PBXNativeTarget "Monster Pit WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				481913641B5DC0AF00C8DB14 /* Debug */,
+				481913651B5DC0AF00C8DB14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 481913131B5DBFDD00C8DB14 /* Project object */;
+}
