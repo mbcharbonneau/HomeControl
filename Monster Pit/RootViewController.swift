@@ -12,7 +12,17 @@ class RootViewController: UICollectionViewController {
 
     private let dataController = DataController()
     private let cellIdentifier = "SensorCell"
-    
+    private var timer: NSTimer?
+
+    // MARK: RootViewController
+
+    func refreshDataSource( timer: NSTimer ) {
+
+        dataController.refresh() {
+            collectionView?.reloadData()
+        }
+    }
+
     // MARK: UIViewController
     
     override func viewDidLoad() {
@@ -22,10 +32,16 @@ class RootViewController: UICollectionViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        dataController.refresh() {
-            collectionView?.reloadData()
-        }
+
+        timer?.invalidate()
+        timer = NSTimer.scheduledTimerWithTimeInterval(60.0, target:self, selector:Selector("refreshDataSource:"), userInfo:nil, repeats:true)
+        timer?.fire()
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        timer?.invalidate()
     }
 
     // MARK: UICollectionViewDataSource
@@ -40,9 +56,11 @@ class RootViewController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier( cellIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
-        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier( cellIdentifier, forIndexPath: indexPath) as! RoomSensorCell
+        let sensor = dataController.sensors[indexPath.row]
+
         cell.backgroundColor = UIColor.redColor()
+        cell.configureWithSensor( sensor )
         
         return cell
     }

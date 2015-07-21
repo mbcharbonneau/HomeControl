@@ -20,6 +20,7 @@
 		4819135A1B5DC0AF00C8DB14 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481913581B5DC0AF00C8DB14 /* Interface.storyboard */; };
 		4819135C1B5DC0AF00C8DB14 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4819135B1B5DC0AF00C8DB14 /* Images.xcassets */; };
 		4819135F1B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 481913441B5DC0AF00C8DB14 /* Monster Pit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		481913691B5EDA1000C8DB14 /* RoomSensorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */; };
 		486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B0B0D1B5DE6E600943145 /* RoomSensor.swift */; };
 		486B0B101B5DE8A500943145 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B0B0F1B5DE8A500943145 /* DataController.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		481913571B5DC0AF00C8DB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		481913591B5DC0AF00C8DB14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		4819135B1B5DC0AF00C8DB14 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomSensorCell.swift; sourceTree = "<group>"; };
 		486B0B0D1B5DE6E600943145 /* RoomSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomSensor.swift; sourceTree = "<group>"; };
 		486B0B0F1B5DE8A500943145 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		486B0B111B5DF5D600943145 /* Monster Pit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Monster Pit.entitlements"; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				481913201B5DBFDD00C8DB14 /* AppDelegate.swift */,
 				481913221B5DBFDD00C8DB14 /* RootViewController.swift */,
+				481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */,
 				486B0B0D1B5DE6E600943145 /* RoomSensor.swift */,
 				486B0B0F1B5DE8A500943145 /* DataController.swift */,
 				481913241B5DBFDD00C8DB14 /* Main.storyboard */,
@@ -382,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				481913231B5DBFDD00C8DB14 /* RootViewController.swift in Sources */,
+				481913691B5EDA1000C8DB14 /* RoomSensorCell.swift in Sources */,
 				486B0B101B5DE8A500943145 /* DataController.swift in Sources */,
 				481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */,
 				486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */,

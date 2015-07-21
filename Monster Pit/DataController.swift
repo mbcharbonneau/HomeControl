@@ -23,8 +23,4 @@ class DataController {
         
         finished()
     }
-    
-    init() {
-        refresh() {}
-    }
 }
