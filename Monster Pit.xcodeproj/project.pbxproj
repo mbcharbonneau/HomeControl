@@ -23,6 +23,17 @@
 		481913691B5EDA1000C8DB14 /* RoomSensorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */; };
 		486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B0B0D1B5DE6E600943145 /* RoomSensor.swift */; };
 		486B0B101B5DE8A500943145 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B0B0F1B5DE8A500943145 /* DataController.swift */; };
+		489477901B619A1D00FBFB67 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894778F1B619A1D00FBFB67 /* libstdc++.6.dylib */; };
+		489477921B619A2700FBFB67 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489477911B619A2700FBFB67 /* SystemConfiguration.framework */; };
+		489477941B619A2E00FBFB67 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489477931B619A2E00FBFB67 /* AudioToolbox.framework */; };
+		489477961B619A3600FBFB67 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 489477951B619A3600FBFB67 /* libsqlite3.dylib */; };
+		4894779D1B619A4700FBFB67 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489477971B619A4700FBFB67 /* Bolts.framework */; };
+		4894779E1B619A4700FBFB67 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489477981B619A4700FBFB67 /* Parse.framework */; };
+		4894779F1B619A4700FBFB67 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489477991B619A4700FBFB67 /* ParseCrashReporting.framework */; };
+		489477A01B619A4700FBFB67 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894779A1B619A4700FBFB67 /* ParseFacebookUtils.framework */; };
+		489477A11B619A4700FBFB67 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894779B1B619A4700FBFB67 /* ParseFacebookUtilsV4.framework */; };
+		489477A21B619A4700FBFB67 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894779C1B619A4700FBFB67 /* ParseUI.framework */; };
+		489477A61B619A7800FBFB67 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489477A51B619A7800FBFB67 /* Configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +99,17 @@
 		486B0B0D1B5DE6E600943145 /* RoomSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomSensor.swift; sourceTree = "<group>"; };
 		486B0B0F1B5DE8A500943145 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		486B0B111B5DF5D600943145 /* Monster Pit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Monster Pit.entitlements"; sourceTree = "<group>"; };
+		4894778F1B619A1D00FBFB67 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		489477911B619A2700FBFB67 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		489477931B619A2E00FBFB67 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		489477951B619A3600FBFB67 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		489477971B619A4700FBFB67 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		489477981B619A4700FBFB67 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		489477991B619A4700FBFB67 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
+		4894779A1B619A4700FBFB67 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		4894779B1B619A4700FBFB67 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		4894779C1B619A4700FBFB67 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		489477A51B619A7800FBFB67 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = "../../../Dropbox/Monster Pit/Configuration.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +117,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4894779D1B619A4700FBFB67 /* Bolts.framework in Frameworks */,
+				489477961B619A3600FBFB67 /* libsqlite3.dylib in Frameworks */,
+				489477A21B619A4700FBFB67 /* ParseUI.framework in Frameworks */,
+				489477941B619A2E00FBFB67 /* AudioToolbox.framework in Frameworks */,
+				489477921B619A2700FBFB67 /* SystemConfiguration.framework in Frameworks */,
+				4894779E1B619A4700FBFB67 /* Parse.framework in Frameworks */,
+				489477A11B619A4700FBFB67 /* ParseFacebookUtilsV4.framework in Frameworks */,
+				4894779F1B619A4700FBFB67 /* ParseCrashReporting.framework in Frameworks */,
+				489477A01B619A4700FBFB67 /* ParseFacebookUtils.framework in Frameworks */,
+				489477901B619A1D00FBFB67 /* libstdc++.6.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +177,7 @@
 				481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */,
 				486B0B0D1B5DE6E600943145 /* RoomSensor.swift */,
 				486B0B0F1B5DE8A500943145 /* DataController.swift */,
+				489477A51B619A7800FBFB67 /* Configuration.swift */,
 				481913241B5DBFDD00C8DB14 /* Main.storyboard */,
 				481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */,
 				4819131E1B5DBFDD00C8DB14 /* Supporting Files */,
@@ -155,6 +188,8 @@
 		4819131E1B5DBFDD00C8DB14 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				489477A31B619A4C00FBFB67 /* Parse */,
+				489477A41B619A5300FBFB67 /* Frameworks */,
 				481913271B5DBFDD00C8DB14 /* Images.xcassets */,
 				486B0B111B5DF5D600943145 /* Monster Pit.entitlements */,
 				4819131F1B5DBFDD00C8DB14 /* Info.plist */,
@@ -215,6 +250,32 @@
 				481913571B5DC0AF00C8DB14 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		489477A31B619A4C00FBFB67 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				489477971B619A4700FBFB67 /* Bolts.framework */,
+				489477981B619A4700FBFB67 /* Parse.framework */,
+				489477991B619A4700FBFB67 /* ParseCrashReporting.framework */,
+				4894779A1B619A4700FBFB67 /* ParseFacebookUtils.framework */,
+				4894779B1B619A4700FBFB67 /* ParseFacebookUtilsV4.framework */,
+				4894779C1B619A4700FBFB67 /* ParseUI.framework */,
+			);
+			name = Parse;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		489477A41B619A5300FBFB67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				489477951B619A3600FBFB67 /* libsqlite3.dylib */,
+				489477931B619A2E00FBFB67 /* AudioToolbox.framework */,
+				489477911B619A2700FBFB67 /* SystemConfiguration.framework */,
+				4894778F1B619A1D00FBFB67 /* libstdc++.6.dylib */,
+			);
+			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				489477A61B619A7800FBFB67 /* Configuration.swift in Sources */,
 				481913231B5DBFDD00C8DB14 /* RootViewController.swift in Sources */,
 				481913691B5EDA1000C8DB14 /* RoomSensorCell.swift in Sources */,
 				486B0B101B5DE8A500943145 /* DataController.swift in Sources */,
@@ -545,6 +607,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Monster Pit/Monster Pit.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Monster Pit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -559,6 +625,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Monster Pit/Monster Pit.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Monster Pit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
