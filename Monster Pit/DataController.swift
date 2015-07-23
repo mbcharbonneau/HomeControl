@@ -15,13 +15,14 @@ class DataController {
     
     func refresh(finished: () -> Void) {
         
-        sensors.removeAll(keepCapacity: true)
+        let query = PFQuery(className: "Sensor")
         
-        let livingRoom = RoomSensor( dictionary:["name": "Living Room"] )
-        let bedroom = RoomSensor( dictionary:["name": "Bedroom"] )
-
-        sensors += [livingRoom, bedroom]
-        
-        finished()
+        query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let objects = results {
+                self.sensors = objects as! [RoomSensor]
+                finished()
+            }
+        }
     }
 }

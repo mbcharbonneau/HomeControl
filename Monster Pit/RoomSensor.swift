@@ -7,21 +7,27 @@
 //
 
 import Foundation
+import Parse
 
-struct RoomSensor {
+class RoomSensor: PFObject, PFSubclassing {
     
-    var name: String
-    var lastUpdate: NSDate
-    var temperature: Double
-    var humidity: Double
-    var light: Double
+    class func parseClassName() -> String {
+        return "Sensor"
+    }
     
-    init( dictionary: NSDictionary ) {
+    var name: String {
+        get { return self["name"] as! String }
+    }
     
-        name = dictionary["name"] as! String
-        lastUpdate = NSDate.new()
-        temperature = 0.0
-        humidity = 0.0
-        light = 0.0
+    var temperature: Double? {
+        get { return self["temp"] as? Double }
+    }
+    
+    var humidity: Double? {
+        get { return self["humidity"] as? Double }
+    }
+    
+    var light: Double? {
+        get { return self["light"] as? Double }
     }
 }

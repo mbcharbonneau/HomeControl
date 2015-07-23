@@ -17,14 +17,25 @@ class RoomSensorCell: UICollectionViewCell {
 
     func configureWithSensor( sensor: RoomSensor ) {
 
-        let degreesF = celsiusToFahrenheit( sensor.temperature )
-        let humidity = sensor.humidity * 100
-        let light = sensor.light * 100
-
         nameLabel?.text = sensor.name
-        tempLabel?.text = "\(degreesF) ℉"
-        humidityLabel?.text = "\(humidity)%"
-        lightLabel?.text = "\(light)%"
+
+        if let degreesC = sensor.temperature {
+            tempLabel?.text = "\(celsiusToFahrenheit( degreesC )) ℉"
+        } else {
+            tempLabel?.text = "0.0 ℉"
+        }
+        
+        if let humidity = sensor.humidity {
+            humidityLabel?.text = "\(humidity * 100.0)%"
+        } else {
+            humidityLabel?.text = "0.0%"
+        }
+        
+        if let light = sensor.light {
+            lightLabel?.text = "\(light * 100.0)%"
+        } else {
+            lightLabel?.text = "0.0%"
+        }
     }
 
     private func celsiusToFahrenheit( celsius: Double ) -> Double {
