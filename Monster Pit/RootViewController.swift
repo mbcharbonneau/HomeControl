@@ -56,6 +56,13 @@ class RootViewController: UICollectionViewController {
         super.viewDidLoad()
 
         colorGenerator.saturation = 0.3
+        
+        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            
+            let margins = layout.sectionInset.left + layout.sectionInset.right
+            let width = ( layout.collectionViewContentSize().width - layout.minimumInteritemSpacing - margins ) / 2.0
+            layout.itemSize = CGSizeMake( width, layout.itemSize.height )
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
