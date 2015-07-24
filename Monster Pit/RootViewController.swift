@@ -61,7 +61,7 @@ class RootViewController: UICollectionViewController {
             
             let margins = layout.sectionInset.left + layout.sectionInset.right
             let width = ( layout.collectionViewContentSize().width - layout.minimumInteritemSpacing - margins ) / 2.0
-            layout.itemSize = CGSizeMake( width, layout.itemSize.height )
+            layout.itemSize = CGSizeMake( width, width * 0.8 )
         }
     }
     
