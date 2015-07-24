@@ -24,21 +24,24 @@ class RoomSensorCell: UICollectionViewCell {
         lastUpdate = sensor.updatedAt
 
         if let degreesC = sensor.temperature {
-            tempLabel?.text = "\(celsiusToFahrenheit( degreesC )) ℉"
+            let tempString = NSString( format:"%.1f", celsiusToFahrenheit( degreesC ) )
+            tempLabel?.text = "\(tempString) ℉"
         } else {
             tempLabel?.text = "0.0 ℉"
         }
         
         if let humidity = sensor.humidity {
-            humidityLabel?.text = "\(humidity * 100.0)% H"
+            let humidityString = NSString( format:"%.0f", humidity * 100.0 )
+            humidityLabel?.text = "H: \(humidityString)%"
         } else {
-            humidityLabel?.text = "0.0% H"
+            humidityLabel?.text = "H: 0.0%"
         }
         
         if let light = sensor.light {
-            lightLabel?.text = "\(light * 100.0)% L"
+            let lightString = NSString( format:"%.0f", luxToPercent( light ) * 100.0 )
+            lightLabel?.text = "L: \(lightString)%"
         } else {
-            lightLabel?.text = "0.0% L"
+            lightLabel?.text = "L: 0.0%"
         }
         
         updateTimeLabel()
@@ -63,5 +66,9 @@ class RoomSensorCell: UICollectionViewCell {
     
     private func celsiusToFahrenheit( celsius: Double ) -> Double {
         return celsius * 9 / 5 + 32
+    }
+    
+    private func luxToPercent( lux: Double ) -> Double {
+        return min( lux / 60, 1.0 )
     }
 }
