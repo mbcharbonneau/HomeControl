@@ -54,7 +54,7 @@ class RoomSensorCell: UICollectionViewCell {
         formatter.includesApproximationPhrase = false
         formatter.collapsesLargestUnit = false
         formatter.maximumUnitCount = 1
-        formatter.allowedUnits = NSCalendarUnit.CalendarUnitMinute | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitDay
+        formatter.allowedUnits = NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitMinute | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitDay
         
         if let date = lastUpdate {
             let string = formatter.stringFromDate( date, toDate:NSDate.new() )!
