@@ -34,6 +34,7 @@
 		489477A11B619A4700FBFB67 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894779B1B619A4700FBFB67 /* ParseFacebookUtilsV4.framework */; };
 		489477A21B619A4700FBFB67 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894779C1B619A4700FBFB67 /* ParseUI.framework */; };
 		489477A61B619A7800FBFB67 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489477A51B619A7800FBFB67 /* Configuration.swift */; };
+		48A0A19D1B61B17F000DA626 /* ColorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0A19C1B61B17F000DA626 /* ColorGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		4894779B1B619A4700FBFB67 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		4894779C1B619A4700FBFB67 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		489477A51B619A7800FBFB67 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = "../../../Dropbox/Monster Pit/Configuration.swift"; sourceTree = "<group>"; };
+		48A0A19C1B61B17F000DA626 /* ColorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 		4819131E1B5DBFDD00C8DB14 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				48A0A19B1B61B169000DA626 /* ColorGenerator */,
 				489477A31B619A4C00FBFB67 /* Parse */,
 				489477A41B619A5300FBFB67 /* Frameworks */,
 				481913271B5DBFDD00C8DB14 /* Images.xcassets */,
@@ -276,6 +279,14 @@
 			);
 			name = Frameworks;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		48A0A19B1B61B169000DA626 /* ColorGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				48A0A19C1B61B17F000DA626 /* ColorGenerator.swift */,
+			);
+			name = ColorGenerator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +389,7 @@
 					};
 					481913501B5DC0AF00C8DB14 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = Y97C7YWSBK;
 					};
 				};
 			};
@@ -450,6 +462,7 @@
 				481913691B5EDA1000C8DB14 /* RoomSensorCell.swift in Sources */,
 				486B0B101B5DE8A500943145 /* DataController.swift in Sources */,
 				481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */,
+				48A0A19D1B61B17F000DA626 /* ColorGenerator.swift in Sources */,
 				486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -674,6 +687,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -682,6 +697,7 @@
 				INFOPLIST_FILE = "Monster Pit WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -692,10 +708,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				IBSC_MODULE = Monster_Pit_WatchKit_Extension;
 				INFOPLIST_FILE = "Monster Pit WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
