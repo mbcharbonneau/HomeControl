@@ -13,8 +13,10 @@ class RootViewController: UICollectionViewController {
     private let dataController = DataController()
     private let colorGenerator = ColorGenerator()
     private let cellIdentifier = "SensorCell"
+    private let footerIdentifier = "Footer"
     private var updateCellsTimer: NSTimer?
     private var updateDataTimer: NSTimer?
+    private weak var updateLabel: UILabel?
     
     // MARK: RootViewController
 
@@ -27,10 +29,23 @@ class RootViewController: UICollectionViewController {
     
     func updateCells( timer: NSTimer ) {
         
-        if let view = collectionView {
+        if let collectionView = collectionView {
             
-            for cell in view.visibleCells() as! [RoomSensorCell] {
+            for cell in collectionView.visibleCells() as! [RoomSensorCell] {
                 cell.updateTimeLabel()
+            }
+            
+            if let label = updateLabel, date = dataController.lastUpdate {
+                
+                let formatter = NSDateComponentsFormatter()
+                formatter.unitsStyle = NSDateComponentsFormatterUnitsStyle.Short
+                formatter.includesApproximationPhrase = false
+                formatter.collapsesLargestUnit = false
+                formatter.maximumUnitCount = 1
+                formatter.allowedUnits = NSCalendarUnit.CalendarUnitMinute | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitDay
+                
+                let time = formatter.stringFromDate( date, toDate:NSDate.new() )!
+                label.text = "Last updated \(time) ago."
             }
         }
     }
@@ -83,6 +98,20 @@ class RootViewController: UICollectionViewController {
         cell.configureWithSensor( sensor )
         
         return cell
+    }
+    
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        switch kind {
+        case UICollectionElementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryViewOfKind( kind, withReuseIdentifier: footerIdentifier, forIndexPath: indexPath ) as! UICollectionReusableView
+            if let label = footer.viewWithTag( 100 ) as? UILabel {
+                updateLabel = label
+            }
+            return footer
+        default:
+            assert(false, "no view for this element!")
+        }
     }
 }
 

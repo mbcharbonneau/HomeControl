@@ -49,7 +49,7 @@ class RoomSensorCell: UICollectionViewCell {
         let formatter = NSDateComponentsFormatter()
         formatter.unitsStyle = NSDateComponentsFormatterUnitsStyle.Short
         formatter.includesApproximationPhrase = false
-        formatter.collapsesLargestUnit = true
+        formatter.collapsesLargestUnit = false
         formatter.maximumUnitCount = 1
         formatter.allowedUnits = NSCalendarUnit.CalendarUnitMinute | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitDay
         

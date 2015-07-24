@@ -12,6 +12,7 @@ import Parse
 class DataController {
     
     var sensors = [RoomSensor]()
+    var lastUpdate: NSDate?
     
     func refresh(finished: () -> Void) {
         
@@ -21,6 +22,7 @@ class DataController {
             
             if let objects = results {
                 self.sensors = objects as! [RoomSensor]
+                self.lastUpdate = NSDate()
                 finished()
             }
         }

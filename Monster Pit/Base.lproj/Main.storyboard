@@ -16,7 +16,7 @@
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NU1-bn-r0K">
                             <size key="itemSize" width="160" height="120"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="50" height="20"/>
                             <inset key="sectionInset" minX="20" minY="40" maxX="20" maxY="20"/>
                         </collectionViewFlowLayout>
                         <cells>
@@ -81,6 +81,22 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Footer" id="rcS-Zt-kH2">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRf-gN-wZb">
+                                    <rect key="frame" x="298" y="3" width="5" height="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="centerY" secondItem="MRf-gN-wZb" secondAttribute="centerY" id="kfS-AE-LZ5"/>
+                                <constraint firstAttribute="centerX" secondItem="MRf-gN-wZb" secondAttribute="centerX" id="nzd-I3-gaJ"/>
+                            </constraints>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="VbQ-T5-QjR" id="lN4-nO-29O"/>
                             <outlet property="delegate" destination="VbQ-T5-QjR" id="5aN-qp-gTe"/>
