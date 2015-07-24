@@ -19,11 +19,41 @@ class SwitchedDevice: PFObject, PFSubclassing {
         get { return self["name"] as! String }
     }
 
-    func turnOn() {
-
+    var state: Bool {
+        get { return self["state"] as! Bool }
+        set( newState ) {
+            self["state"] = newState
+        }
     }
 
-    func turnOff() {
-        
+    func turnOn( finished: () -> Void ) {
+        sendCommand( "On", callback: finished )
+    }
+
+    func turnOff( finished: () -> Void ) {
+        sendCommand( "Off", callback: finished )
+    }
+
+    private func makeURLForCommand( command: String ) -> String {
+        let eventName = name.stringByReplacingOccurrencesOfString(" ", withString: "") + command
+        return "https://maker.ifttt.com/trigger/\(eventName)/with/key/\(Configuration.IFTTT.ClientKey)"
+    }
+
+    private func sendCommand( command: String, callback: () -> Void ) {
+
+        if let URL = NSURL( string: makeURLForCommand( command ) ) {
+
+            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let session = NSURLSession(configuration: config)
+            let request = NSMutableURLRequest(URL: URL)
+
+            request.HTTPMethod = "POST"
+
+            session.downloadTaskWithRequest( request, completionHandler: { (location, response, error) -> Void in
+                if ( error == nil ) {
+                    callback()
+                }
+            })
+        }
     }
 }
