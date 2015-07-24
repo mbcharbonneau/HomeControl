@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4817BAE71B6298D20092E6C8 /* SwitchedDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4817BAE61B6298D20092E6C8 /* SwitchedDevice.swift */; };
+		4817BAE91B629C3B0092E6C8 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4817BAE81B629C3B0092E6C8 /* DeviceCell.swift */; };
 		481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481913201B5DBFDD00C8DB14 /* AppDelegate.swift */; };
 		481913231B5DBFDD00C8DB14 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481913221B5DBFDD00C8DB14 /* RootViewController.swift */; };
 		481913261B5DBFDD00C8DB14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481913241B5DBFDD00C8DB14 /* Main.storyboard */; };
@@ -76,6 +78,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4817BAE61B6298D20092E6C8 /* SwitchedDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchedDevice.swift; sourceTree = "<group>"; };
+		4817BAE81B629C3B0092E6C8 /* DeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
 		4819131B1B5DBFDD00C8DB14 /* Monster Pit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monster Pit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4819131F1B5DBFDD00C8DB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		481913201B5DBFDD00C8DB14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +153,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4817BAE41B6298760092E6C8 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				481913201B5DBFDD00C8DB14 /* AppDelegate.swift */,
+				481913221B5DBFDD00C8DB14 /* RootViewController.swift */,
+				481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */,
+				4817BAE81B629C3B0092E6C8 /* DeviceCell.swift */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		4817BAE51B62988A0092E6C8 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				486B0B0F1B5DE8A500943145 /* DataController.swift */,
+				486B0B0D1B5DE6E600943145 /* RoomSensor.swift */,
+				4817BAE61B6298D20092E6C8 /* SwitchedDevice.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		481913121B5DBFDD00C8DB14 = {
 			isa = PBXGroup;
 			children = (
@@ -174,14 +199,9 @@
 		4819131D1B5DBFDD00C8DB14 /* Monster Pit */ = {
 			isa = PBXGroup;
 			children = (
-				481913201B5DBFDD00C8DB14 /* AppDelegate.swift */,
-				481913221B5DBFDD00C8DB14 /* RootViewController.swift */,
-				481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */,
-				486B0B0D1B5DE6E600943145 /* RoomSensor.swift */,
-				486B0B0F1B5DE8A500943145 /* DataController.swift */,
+				4817BAE41B6298760092E6C8 /* View Controller */,
+				4817BAE51B62988A0092E6C8 /* Data */,
 				489477A51B619A7800FBFB67 /* Configuration.swift */,
-				481913241B5DBFDD00C8DB14 /* Main.storyboard */,
-				481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */,
 				4819131E1B5DBFDD00C8DB14 /* Supporting Files */,
 			);
 			path = "Monster Pit";
@@ -194,6 +214,8 @@
 				489477A31B619A4C00FBFB67 /* Parse */,
 				489477A41B619A5300FBFB67 /* Frameworks */,
 				481913271B5DBFDD00C8DB14 /* Images.xcassets */,
+				481913241B5DBFDD00C8DB14 /* Main.storyboard */,
+				481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */,
 				486B0B111B5DF5D600943145 /* Monster Pit.entitlements */,
 				4819131F1B5DBFDD00C8DB14 /* Info.plist */,
 			);
@@ -459,8 +481,10 @@
 			files = (
 				489477A61B619A7800FBFB67 /* Configuration.swift in Sources */,
 				481913231B5DBFDD00C8DB14 /* RootViewController.swift in Sources */,
+				4817BAE71B6298D20092E6C8 /* SwitchedDevice.swift in Sources */,
 				481913691B5EDA1000C8DB14 /* RoomSensorCell.swift in Sources */,
 				486B0B101B5DE8A500943145 /* DataController.swift in Sources */,
+				4817BAE91B629C3B0092E6C8 /* DeviceCell.swift in Sources */,
 				481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */,
 				48A0A19D1B61B17F000DA626 /* ColorGenerator.swift in Sources */,
 				486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */,

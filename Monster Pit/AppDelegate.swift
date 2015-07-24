@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         RoomSensor.registerSubclass()
-        Parse.setApplicationId( Configuration.ParseAppID, clientKey:Configuration.ParseClientKey )
+        SwitchedDevice.registerSubclass()
+
+        Parse.setApplicationId( Configuration.Parse.AppID, clientKey:Configuration.Parse.ClientKey )
         
         return true
     }

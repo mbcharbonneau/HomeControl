@@ -8,11 +8,12 @@
 
 import UIKit
 
-class RootViewController: UICollectionViewController {
+class RootViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     private let dataController = DataController()
     private let colorGenerator = ColorGenerator()
-    private let cellIdentifier = "SensorCell"
+    private let sensorCellIdentifier = "SensorCell"
+    private let deviceCellIdentifier = "DeviceCell"
     private let footerIdentifier = "Footer"
     private var updateCellsTimer: NSTimer?
     private var updateDataTimer: NSTimer?
@@ -31,8 +32,11 @@ class RootViewController: UICollectionViewController {
         
         if let collectionView = collectionView {
             
-            for cell in collectionView.visibleCells() as! [RoomSensorCell] {
-                cell.updateTimeLabel()
+            for cell in collectionView.visibleCells() as! [UICollectionViewCell] {
+
+                if let cell = cell as? RoomSensorCell {
+                    cell.updateTimeLabel()
+                }
             }
             
             if let label = updateLabel, date = dataController.lastUpdate {
@@ -56,13 +60,6 @@ class RootViewController: UICollectionViewController {
         super.viewDidLoad()
 
         colorGenerator.saturation = 0.3
-        
-        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            
-            let margins = layout.sectionInset.left + layout.sectionInset.right
-            let width = ( layout.collectionViewContentSize().width - layout.minimumInteritemSpacing - margins ) / 2.0
-            layout.itemSize = CGSizeMake( width, width * 0.8 )
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -86,25 +83,47 @@ class RootViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataController.sensors.count
+        switch section {
+        case 0:
+            return dataController.sensors.count
+        case 1:
+            return dataController.devices.count
+        default:
+            assert( false, "invalid section" )
+        }
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier( cellIdentifier, forIndexPath: indexPath) as! RoomSensorCell
-        let sensor = dataController.sensors[indexPath.row]
 
-        if ( cell.backgroundColor == nil ) {
-            cell.backgroundColor = colorGenerator.randomColor()
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier( sensorCellIdentifier, forIndexPath: indexPath) as! RoomSensorCell
+
+            if ( cell.backgroundColor == nil ) {
+                cell.backgroundColor = colorGenerator.randomColor()
+            }
+
+            cell.configureWithSensor( dataController.sensors[indexPath.row] )
+            
+            return cell
+
+        case 1:
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier( deviceCellIdentifier, forIndexPath: indexPath) as! DeviceCell
+
+            if ( cell.backgroundColor == nil ) {
+                cell.backgroundColor = colorGenerator.randomColor()
+            }
+
+            cell.configureWithDevice( dataController.devices[indexPath.row] )
+
+            return cell
+        default:
+            assert( false, "invalid section" )
         }
-        
-        cell.configureWithSensor( sensor )
-        
-        return cell
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -117,8 +136,48 @@ class RootViewController: UICollectionViewController {
             }
             return footer
         default:
-            assert(false, "no view for this element!")
+            assert( false, "invalid element" )
+        }
+    }
+
+    // MARK: UICollectionViewDelegateFlowLayout
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+
+        let layout = collectionViewLayout as! UICollectionViewFlowLayout
+        let margins = layout.sectionInset.left + layout.sectionInset.right
+
+        switch indexPath.section {
+        case 0:
+            let width = ( collectionView.frame.size.width - layout.minimumInteritemSpacing - margins ) / 2.0
+            return CGSizeMake( width, width * 0.8 )
+        case 1:
+            return CGSizeMake( collectionView.frame.size.width - margins, 50.0 )
+        default:
+            assert( false, "invalid section" )
+        }
+    }
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        switch section {
+        case 0:
+            return UIEdgeInsetsMake( 40.0, 20.0, 20.0, 20.0 )
+        case 1:
+            return UIEdgeInsetsMake( 0.0, 20.0, 20.0, 20.0 )
+        default:
+            assert( false, "invalid section" )
+        }
+
+    }
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        switch section {
+        case 0:
+            return CGSizeZero
+        case 1:
+            return CGSizeMake( collectionView.frame.width, 10.0 )
+        default:
+            assert( false, "invalid section" )
         }
     }
 }
-

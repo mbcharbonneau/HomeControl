@@ -12,18 +12,27 @@ import Parse
 class DataController {
     
     var sensors = [RoomSensor]()
+    var devices = [SwitchedDevice]()
     var lastUpdate: NSDate?
     
     func refresh(finished: () -> Void) {
-        
-        let query = PFQuery(className: "Sensor")
-        
-        query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
-            
-            if let objects = results {
-                self.sensors = objects as! [RoomSensor]
-                self.lastUpdate = NSDate()
-                finished()
+
+        dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ) ) {
+
+            let sensorQuery = PFQuery(className: "Sensor")
+            let deviceQuery = PFQuery(className: "Device")
+
+            let sensorResults = sensorQuery.findObjects()
+            let deviceResults = deviceQuery.findObjects()
+
+            dispatch_async( dispatch_get_main_queue() ) {
+
+                if let sensors = sensorResults as? [RoomSensor], devices = deviceResults as? [SwitchedDevice] {
+                    self.sensors = sensors
+                    self.devices = devices
+                    self.lastUpdate = NSDate()
+                    finished()
+                }
             }
         }
     }
