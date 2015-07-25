@@ -186,7 +186,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         default:
             assert( false, "invalid section" )
         }
-
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {

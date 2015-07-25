@@ -37,6 +37,11 @@
 		489477A21B619A4700FBFB67 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894779C1B619A4700FBFB67 /* ParseUI.framework */; };
 		489477A61B619A7800FBFB67 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489477A51B619A7800FBFB67 /* Configuration.swift */; };
 		48A0A19D1B61B17F000DA626 /* ColorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0A19C1B61B17F000DA626 /* ColorGenerator.swift */; };
+		48A5FC301B6420FF009D0893 /* StatusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC2F1B6420FF009D0893 /* StatusIndicatorView.swift */; };
+		48A5FC321B642489009D0893 /* DecisionMakerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC311B642489009D0893 /* DecisionMakerProtocol.swift */; };
+		48A5FC361B642863009D0893 /* GeofenceDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC351B642863009D0893 /* GeofenceDecider.swift */; };
+		48A5FC381B6428C0009D0893 /* BeaconDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC371B6428C0009D0893 /* BeaconDecider.swift */; };
+		48A5FC3A1B64290E009D0893 /* SensorDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC391B64290E009D0893 /* SensorDecider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +121,11 @@
 		4894779C1B619A4700FBFB67 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		489477A51B619A7800FBFB67 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = "../../../Dropbox/Monster Pit/Configuration.swift"; sourceTree = "<group>"; };
 		48A0A19C1B61B17F000DA626 /* ColorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorGenerator.swift; sourceTree = "<group>"; };
+		48A5FC2F1B6420FF009D0893 /* StatusIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusIndicatorView.swift; sourceTree = "<group>"; };
+		48A5FC311B642489009D0893 /* DecisionMakerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecisionMakerProtocol.swift; sourceTree = "<group>"; };
+		48A5FC351B642863009D0893 /* GeofenceDecider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeofenceDecider.swift; sourceTree = "<group>"; };
+		48A5FC371B6428C0009D0893 /* BeaconDecider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconDecider.swift; sourceTree = "<group>"; };
+		48A5FC391B64290E009D0893 /* SensorDecider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDecider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,23 +163,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4817BAE41B6298760092E6C8 /* View Controller */ = {
+		4817BAE41B6298760092E6C8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				481913201B5DBFDD00C8DB14 /* AppDelegate.swift */,
-				481913221B5DBFDD00C8DB14 /* RootViewController.swift */,
 				481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */,
 				4817BAE81B629C3B0092E6C8 /* DeviceCell.swift */,
+				48A5FC2F1B6420FF009D0893 /* StatusIndicatorView.swift */,
 			);
-			name = "View Controller";
+			name = View;
 			sourceTree = "<group>";
 		};
 		4817BAE51B62988A0092E6C8 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				486B0B0F1B5DE8A500943145 /* DataController.swift */,
 				486B0B0D1B5DE6E600943145 /* RoomSensor.swift */,
 				4817BAE61B6298D20092E6C8 /* SwitchedDevice.swift */,
+				48A5FC311B642489009D0893 /* DecisionMakerProtocol.swift */,
+				48A5FC351B642863009D0893 /* GeofenceDecider.swift */,
+				48A5FC371B6428C0009D0893 /* BeaconDecider.swift */,
+				48A5FC391B64290E009D0893 /* SensorDecider.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -199,9 +211,9 @@
 		4819131D1B5DBFDD00C8DB14 /* Monster Pit */ = {
 			isa = PBXGroup;
 			children = (
-				4817BAE41B6298760092E6C8 /* View Controller */,
+				48A5FC331B642528009D0893 /* Controllers */,
+				4817BAE41B6298760092E6C8 /* View */,
 				4817BAE51B62988A0092E6C8 /* Data */,
-				489477A51B619A7800FBFB67 /* Configuration.swift */,
 				4819131E1B5DBFDD00C8DB14 /* Supporting Files */,
 			);
 			path = "Monster Pit";
@@ -216,6 +228,7 @@
 				481913271B5DBFDD00C8DB14 /* Images.xcassets */,
 				481913241B5DBFDD00C8DB14 /* Main.storyboard */,
 				481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */,
+				489477A51B619A7800FBFB67 /* Configuration.swift */,
 				486B0B111B5DF5D600943145 /* Monster Pit.entitlements */,
 				4819131F1B5DBFDD00C8DB14 /* Info.plist */,
 			);
@@ -309,6 +322,16 @@
 				48A0A19C1B61B17F000DA626 /* ColorGenerator.swift */,
 			);
 			name = ColorGenerator;
+			sourceTree = "<group>";
+		};
+		48A5FC331B642528009D0893 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				481913201B5DBFDD00C8DB14 /* AppDelegate.swift */,
+				481913221B5DBFDD00C8DB14 /* RootViewController.swift */,
+				486B0B0F1B5DE8A500943145 /* DataController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -481,10 +504,15 @@
 			files = (
 				489477A61B619A7800FBFB67 /* Configuration.swift in Sources */,
 				481913231B5DBFDD00C8DB14 /* RootViewController.swift in Sources */,
+				48A5FC381B6428C0009D0893 /* BeaconDecider.swift in Sources */,
+				48A5FC301B6420FF009D0893 /* StatusIndicatorView.swift in Sources */,
 				4817BAE71B6298D20092E6C8 /* SwitchedDevice.swift in Sources */,
 				481913691B5EDA1000C8DB14 /* RoomSensorCell.swift in Sources */,
 				486B0B101B5DE8A500943145 /* DataController.swift in Sources */,
 				4817BAE91B629C3B0092E6C8 /* DeviceCell.swift in Sources */,
+				48A5FC3A1B64290E009D0893 /* SensorDecider.swift in Sources */,
+				48A5FC321B642489009D0893 /* DecisionMakerProtocol.swift in Sources */,
+				48A5FC361B642863009D0893 /* GeofenceDecider.swift in Sources */,
 				481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */,
 				48A0A19D1B61B17F000DA626 /* ColorGenerator.swift in Sources */,
 				486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */,
