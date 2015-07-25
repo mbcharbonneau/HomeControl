@@ -17,7 +17,13 @@ class SensorDecider: DecisionMakerProtocol {
     }
     
     var state: State {
-        get { return State.On }
+        get {
+            if let light = sensor.light {
+                return light > 10.0 ? State.Off : State.On
+            } else {
+                return State.Unknown
+            }
+        }
     }
     
     init( sensor: RoomSensor ) {

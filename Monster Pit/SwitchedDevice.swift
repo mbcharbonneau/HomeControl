@@ -10,13 +10,12 @@ import UIKit
 import Parse
 
 class SwitchedDevice: PFObject, PFSubclassing {
+    
+    // MARK: SwitchedDevice
 
+    private var deciders = [DecisionMakerProtocol]()
     private var commandTask: NSURLSessionTask?
     
-    class func parseClassName() -> String {
-        return "Device"
-    }
-
     var name: String {
         get { return self["name"] as! String }
     }
@@ -34,7 +33,6 @@ class SwitchedDevice: PFObject, PFSubclassing {
         sendCommand( "On", callback: { ( error: NSError? ) -> Void in
             if ( error == nil ) {
                 self.on = true
-                self.saveInBackgroundWithBlock( nil )
             }
             finished( error )
         })
@@ -44,12 +42,13 @@ class SwitchedDevice: PFObject, PFSubclassing {
         sendCommand( "Off", callback: { ( error: NSError? ) -> Void in
             if ( error == nil ) {
                 self.on = false
-                self.saveInBackgroundWithBlock( nil )
             }
             finished( error )
         })
     }
 
+    // MARK: SwitchedDevice Private
+    
     private func makeURLForCommand( command: String ) -> String {
         let eventName = name.stringByReplacingOccurrencesOfString(" ", withString: "") + command
         return "https://maker.ifttt.com/trigger/\(eventName)/with/key/\(Configuration.IFTTT.ClientKey)"
@@ -74,5 +73,11 @@ class SwitchedDevice: PFObject, PFSubclassing {
             
             commandTask?.resume()
         }
+    }
+    
+    // MARK: PFSubclassing
+ 
+    class func parseClassName() -> String {
+        return "Device"
     }
 }

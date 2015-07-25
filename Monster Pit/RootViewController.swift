@@ -62,10 +62,12 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         if control.on {
             device.turnOn { ( error: NSError? ) -> Void in
                 self.collectionView?.reloadItemsAtIndexPaths([path])
+                device.saveInBackgroundWithBlock( nil )
             }
         } else {
             device.turnOff { ( error: NSError? ) -> Void in
                 self.collectionView?.reloadItemsAtIndexPaths([path])
+                device.saveInBackgroundWithBlock( nil )
             }
         }
 

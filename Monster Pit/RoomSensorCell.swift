@@ -27,21 +27,21 @@ class RoomSensorCell: UICollectionViewCell {
             let tempString = NSString( format:"%.1f", celsiusToFahrenheit( degreesC ) )
             tempLabel?.text = "\(tempString) ℉"
         } else {
-            tempLabel?.text = "0.0 ℉"
+            tempLabel?.text = "-.- ℉"
         }
         
         if let humidity = sensor.humidity {
             let humidityString = NSString( format:"%.0f", humidity * 100.0 )
             humidityLabel?.text = "H: \(humidityString)%"
         } else {
-            humidityLabel?.text = "H: 0.0%"
+            humidityLabel?.text = "H: -.-%"
         }
         
         if let light = sensor.light {
             let lightString = NSString( format:"%.0f", luxToPercent( light ) * 100.0 )
             lightLabel?.text = "L: \(lightString)%"
         } else {
-            lightLabel?.text = "L: 0.0%"
+            lightLabel?.text = "L: -.-%"
         }
         
         updateTimeLabel()
