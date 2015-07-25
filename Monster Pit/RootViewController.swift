@@ -28,7 +28,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
-    func updateCells( timer: NSTimer ) {
+    func refreshCellLabels( timer: NSTimer ) {
         
         if let collectionView = collectionView {
             
@@ -53,7 +53,25 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
             }
         }
     }
+    
+    @IBAction func toggleDeviceOnOff( control: UISwitch ) {
+        
+        let device = dataController.devices[control.tag]
+        let path = NSIndexPath(forItem: control.tag, inSection: 1)
+        
+        if control.on {
+            device.turnOn { ( error: NSError? ) -> Void in
+                self.collectionView?.reloadItemsAtIndexPaths([path])
+            }
+        } else {
+            device.turnOff { ( error: NSError? ) -> Void in
+                self.collectionView?.reloadItemsAtIndexPaths([path])
+            }
+        }
 
+        control.enabled = false
+    }
+    
     // MARK: UIViewController
     
     override func viewDidLoad() {
@@ -70,7 +88,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         updateDataTimer?.fire()
         
         updateCellsTimer?.invalidate()
-        updateCellsTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:Selector("updateCells:"), userInfo:nil, repeats:true)
+        updateCellsTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:Selector("refreshCellLabels:"), userInfo:nil, repeats:true)
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -119,6 +137,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
             }
 
             cell.configureWithDevice( dataController.devices[indexPath.row] )
+            cell.setSwitchTarget( self, action: Selector("toggleDeviceOnOff:"), identifier: indexPath.row )
 
             return cell
         default:
@@ -175,7 +194,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         case 0:
             return CGSizeZero
         case 1:
-            return CGSizeMake( collectionView.frame.width, 10.0 )
+            return CGSizeMake( collectionView.frame.width, 16.0 )
         default:
             assert( false, "invalid section" )
         }

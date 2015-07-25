@@ -16,5 +16,14 @@ class DeviceCell: UICollectionViewCell {
     func configureWithDevice( device: SwitchedDevice ) {
 
         nameLabel?.text = device.name
+        deviceSwitch?.enabled = !device.isBusy
+        deviceSwitch?.setOn( device.on, animated: true )
+    }
+    
+    func setSwitchTarget( target: AnyObject?, action: Selector, identifier: Int ) {
+        
+        deviceSwitch?.removeTarget( nil, action: nil, forControlEvents: UIControlEvents.ValueChanged )
+        deviceSwitch?.addTarget( target, action: action, forControlEvents: UIControlEvents.ValueChanged )
+        deviceSwitch?.tag = identifier
     }
 }

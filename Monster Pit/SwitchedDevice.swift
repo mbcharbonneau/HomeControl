@@ -11,6 +11,8 @@ import Parse
 
 class SwitchedDevice: PFObject, PFSubclassing {
 
+    private var commandTask: NSURLSessionTask?
+    
     class func parseClassName() -> String {
         return "Device"
     }
@@ -19,19 +21,33 @@ class SwitchedDevice: PFObject, PFSubclassing {
         get { return self["name"] as! String }
     }
 
-    var state: Bool {
-        get { return self["state"] as! Bool }
-        set( newState ) {
-            self["state"] = newState
-        }
+    var on: Bool {
+        get { return self["on"] as! Bool }
+        set( newState ) { self["on"] = newState }
+    }
+    
+    var isBusy: Bool {
+        get { return commandTask != nil && commandTask?.state != NSURLSessionTaskState.Completed }
     }
 
-    func turnOn( finished: () -> Void ) {
-        sendCommand( "On", callback: finished )
+    func turnOn( finished: ( NSError? ) -> Void ) {
+        sendCommand( "On", callback: { ( error: NSError? ) -> Void in
+            if ( error == nil ) {
+                self.on = true
+                self.saveInBackgroundWithBlock( nil )
+            }
+            finished( error )
+        })
     }
 
-    func turnOff( finished: () -> Void ) {
-        sendCommand( "Off", callback: finished )
+    func turnOff( finished: ( NSError? ) -> Void ) {
+        sendCommand( "Off", callback: { ( error: NSError? ) -> Void in
+            if ( error == nil ) {
+                self.on = false
+                self.saveInBackgroundWithBlock( nil )
+            }
+            finished( error )
+        })
     }
 
     private func makeURLForCommand( command: String ) -> String {
@@ -39,7 +55,7 @@ class SwitchedDevice: PFObject, PFSubclassing {
         return "https://maker.ifttt.com/trigger/\(eventName)/with/key/\(Configuration.IFTTT.ClientKey)"
     }
 
-    private func sendCommand( command: String, callback: () -> Void ) {
+    private func sendCommand( command: String, callback: ( NSError? ) -> Void ) {
 
         if let URL = NSURL( string: makeURLForCommand( command ) ) {
 
@@ -49,11 +65,14 @@ class SwitchedDevice: PFObject, PFSubclassing {
 
             request.HTTPMethod = "POST"
 
-            session.downloadTaskWithRequest( request, completionHandler: { (location, response, error) -> Void in
-                if ( error == nil ) {
-                    callback()
-                }
+            commandTask = session.dataTaskWithRequest( request, completionHandler: { ( data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+                dispatch_async( dispatch_get_main_queue(), { () -> Void in
+                    callback( error )
+                    self.commandTask = nil
+                })
             })
+            
+            commandTask?.resume()
         }
     }
 }
