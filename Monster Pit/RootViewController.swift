@@ -30,23 +30,12 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         control.enabled = false
     }
     
-    // MARK: RootViewController Private
-    
-    private let dataController = DataController()
-    private let colorGenerator = ColorGenerator()
-    private let sensorCellIdentifier = "SensorCell"
-    private let deviceCellIdentifier = "DeviceCell"
-    private let footerIdentifier = "Footer"
-    private var updateCellsTimer: NSTimer?
-    private var updateDataTimer: NSTimer?
-    private weak var updateLabel: UILabel?
-    
-    private func refreshDataSource( timer: NSTimer ) {
+    func refreshDataSource( timer: NSTimer ) {
         
         dataController.refresh()
     }
     
-    private func refreshCellLabels( timer: NSTimer ) {
+    func refreshCellLabels( timer: NSTimer ) {
         
         if let collectionView = collectionView {
             
@@ -72,6 +61,18 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
+    // MARK: RootViewController Private
+    
+    private let locationController = LocationController()
+    private let dataController = DataController()
+    private let colorGenerator = ColorGenerator()
+    private let sensorCellIdentifier = "SensorCell"
+    private let deviceCellIdentifier = "DeviceCell"
+    private let footerIdentifier = "Footer"
+    private var updateCellsTimer: NSTimer?
+    private var updateDataTimer: NSTimer?
+    private weak var updateLabel: UILabel?
+    
     // MARK: UIViewController
     
     override func viewDidLoad() {
@@ -79,6 +80,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
 
         colorGenerator.saturation = 0.3
         dataController.delegate = self
+        locationController.dataController = dataController
     }
     
     override func viewDidAppear(animated: Bool) {

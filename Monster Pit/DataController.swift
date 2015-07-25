@@ -45,9 +45,9 @@ class DataController {
         }
     }
     
-    func evaluateAutoDeciders(insideGeofence: State, insideOffBeacon: State) {
+    func evaluateAutoDeciders(geofenceState: CLRegionState, beaconState: CLRegionState) {
         
-//        var changes = 0
+//        var changedDevices = [SwitchedDevice]()
 //        
 //        for device in devices {
 //            
