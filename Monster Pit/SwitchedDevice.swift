@@ -13,8 +13,7 @@ class SwitchedDevice: PFObject, PFSubclassing {
     
     // MARK: SwitchedDevice
 
-    private var deciders = [DecisionMakerProtocol]()
-    private var commandTask: NSURLSessionTask?
+    var deciders = [DecisionMakerProtocol]()
     
     var name: String {
         get { return self["name"] as! String }
@@ -33,6 +32,7 @@ class SwitchedDevice: PFObject, PFSubclassing {
         sendCommand( "On", callback: { ( error: NSError? ) -> Void in
             if ( error == nil ) {
                 self.on = true
+                self.saveInBackgroundWithBlock( nil )
             }
             finished( error )
         })
@@ -42,12 +42,15 @@ class SwitchedDevice: PFObject, PFSubclassing {
         sendCommand( "Off", callback: { ( error: NSError? ) -> Void in
             if ( error == nil ) {
                 self.on = false
+                self.saveInBackgroundWithBlock( nil )
             }
             finished( error )
         })
     }
 
     // MARK: SwitchedDevice Private
+    
+    private var commandTask: NSURLSessionTask?
     
     private func makeURLForCommand( command: String ) -> String {
         let eventName = name.stringByReplacingOccurrencesOfString(" ", withString: "") + command

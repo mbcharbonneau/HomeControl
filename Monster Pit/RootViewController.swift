@@ -8,8 +8,30 @@
 
 import UIKit
 
-class RootViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class RootViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, DataControllerDelegate {
+    
+    // MARK: RootViewController
+    
+    @IBAction func toggleDeviceOnOff( control: UISwitch ) {
+        
+        let device = dataController.devices[control.tag]
+        let path = NSIndexPath(forItem: control.tag, inSection: 1)
+        
+        if control.on {
+            device.turnOn { ( error: NSError? ) -> Void in
+                self.collectionView?.reloadItemsAtIndexPaths([path])
+            }
+        } else {
+            device.turnOff { ( error: NSError? ) -> Void in
+                self.collectionView?.reloadItemsAtIndexPaths([path])
+            }
+        }
 
+        control.enabled = false
+    }
+    
+    // MARK: RootViewController Private
+    
     private let dataController = DataController()
     private let colorGenerator = ColorGenerator()
     private let sensorCellIdentifier = "SensorCell"
@@ -19,21 +41,17 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     private var updateDataTimer: NSTimer?
     private weak var updateLabel: UILabel?
     
-    // MARK: RootViewController
-
-    func refreshDataSource( timer: NSTimer ) {
-
-        dataController.refresh() {
-            collectionView?.reloadData()
-        }
+    private func refreshDataSource( timer: NSTimer ) {
+        
+        dataController.refresh()
     }
     
-    func refreshCellLabels( timer: NSTimer ) {
+    private func refreshCellLabels( timer: NSTimer ) {
         
         if let collectionView = collectionView {
             
             for cell in collectionView.visibleCells() as! [UICollectionViewCell] {
-
+                
                 if let cell = cell as? RoomSensorCell {
                     cell.updateTimeLabel()
                 }
@@ -54,32 +72,13 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
-    @IBAction func toggleDeviceOnOff( control: UISwitch ) {
-        
-        let device = dataController.devices[control.tag]
-        let path = NSIndexPath(forItem: control.tag, inSection: 1)
-        
-        if control.on {
-            device.turnOn { ( error: NSError? ) -> Void in
-                self.collectionView?.reloadItemsAtIndexPaths([path])
-                device.saveInBackgroundWithBlock( nil )
-            }
-        } else {
-            device.turnOff { ( error: NSError? ) -> Void in
-                self.collectionView?.reloadItemsAtIndexPaths([path])
-                device.saveInBackgroundWithBlock( nil )
-            }
-        }
-
-        control.enabled = false
-    }
-    
     // MARK: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         colorGenerator.saturation = 0.3
+        dataController.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -199,5 +198,15 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         default:
             assert( false, "invalid section" )
         }
+    }
+    
+    // MARK: DataControllerDelegate
+    
+    func dataControllerRefreshed(controller: DataController) {
+        collectionView?.reloadData()
+    }
+    
+    func dataController(controller: DataController, toggledDevices: [SwitchedDevice]) {
+        collectionView?.reloadData()
     }
 }
