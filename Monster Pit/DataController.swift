@@ -102,18 +102,16 @@ class DataController: NSObject {
                 turnOn = turnOn && decision;
             }
             
+            let block = { ( error: NSError? ) -> Void in
+                if ( error == nil ) {
+                    self.delegate?.dataController( self, toggledDevice: device )
+                }
+            }
+            
             if turnOn && !device.on {
-                device.turnOn { ( error: NSError? ) -> Void in
-                    if ( error == nil ) {
-                        self.delegate?.dataController( self, toggledDevice: device )
-                    }
-                }
+                device.turnOn( block )
             } else if !turnOn && device.on {
-                device.turnOff { ( error: NSError? ) -> Void in
-                    if ( error == nil ) {
-                        self.delegate?.dataController( self, toggledDevice: device )
-                    }
-                }
+                device.turnOff( block )
             }
         }
     }

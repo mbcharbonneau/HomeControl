@@ -10,6 +10,7 @@ import UIKit
 
 class DeviceCell: UICollectionViewCell {
 
+    private var device: SwitchedDevice?
     @IBOutlet weak private var nameLabel: UILabel?
     @IBOutlet weak private var deciderLabel: UILabel?
     @IBOutlet weak private var deviceSwitch: UISwitch?
@@ -23,10 +24,11 @@ class DeviceCell: UICollectionViewCell {
 
     func configureWithDevice( device: SwitchedDevice ) {
 
+        self.device = device
         nameLabel?.text = device.name
-        deciderLabel?.text = deciderString( device.deciders )
         deviceSwitch?.setOn( device.on, animated: true )
         deviceSwitch?.enabled = !device.isBusy && device.online
+        updateDecidersLabel()
     }
     
     func setSwitchTarget( target: AnyObject?, action: Selector, identifier: Int ) {
@@ -34,6 +36,12 @@ class DeviceCell: UICollectionViewCell {
         deviceSwitch?.removeTarget( nil, action: nil, forControlEvents: UIControlEvents.ValueChanged )
         deviceSwitch?.addTarget( target, action: action, forControlEvents: UIControlEvents.ValueChanged )
         deviceSwitch?.tag = identifier
+    }
+    
+    func updateDecidersLabel() {
+        if let device = device {
+            deciderLabel?.text = deciderString( device.deciders )
+        }
     }
     
     private func deciderString( deciders: [DecisionMakerProtocol] ) -> String {
@@ -47,5 +55,10 @@ class DeviceCell: UICollectionViewCell {
         }
         
         return string.isEmpty ? "Manual Only" : string
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        device = nil
     }
 }

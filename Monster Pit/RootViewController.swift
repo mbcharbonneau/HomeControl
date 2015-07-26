@@ -19,15 +19,18 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         let device = dataController.devices[sender.tag]
         let path = NSIndexPath(forItem: sender.tag, inSection: 1)
+        let block = { ( error: NSError? ) -> Void in
+            if error != nil {
+                self.collectionView?.reloadItemsAtIndexPaths([path])
+            } else {
+                sender.enabled = true
+            }
+        }
         
         if sender.on {
-            device.turnOn { ( error: NSError? ) -> Void in
-                self.collectionView?.reloadItemsAtIndexPaths([path])
-            }
+            device.turnOn( block )
         } else {
-            device.turnOff { ( error: NSError? ) -> Void in
-                self.collectionView?.reloadItemsAtIndexPaths([path])
-            }
+            device.turnOff( block )
         }
 
         sender.enabled = false
@@ -51,6 +54,8 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
                 
                 if let cell = cell as? RoomSensorCell {
                     cell.updateTimeLabel()
+                } else if let cell = cell as? DeviceCell {
+                    cell.updateDecidersLabel()
                 }
             }
             
@@ -67,14 +72,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
                 label.text = "Last updated \(time) ago."
             }
         }
-    }
-
-    func refreshDevices( notification: NSNotification ) {
-        collectionView?.reloadSections(NSIndexSet(index: 1))
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.ForceEvaluationNotification, object: nil)
     }
     
     // MARK: RootViewController Private
@@ -96,7 +93,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         dataController.delegate = self
         toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("refreshDevices:"), name: Constants.ForceEvaluationNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
