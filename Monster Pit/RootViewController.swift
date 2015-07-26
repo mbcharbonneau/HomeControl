@@ -68,6 +68,14 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
             }
         }
     }
+
+    func refreshDevices( notification: NSNotification ) {
+        collectionView?.reloadSections(NSIndexSet(index: 1))
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.ForceEvaluationNotification, object: nil)
+    }
     
     // MARK: RootViewController Private
     
@@ -88,6 +96,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         dataController.delegate = self
         toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("refreshDevices:"), name: Constants.ForceEvaluationNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -24,10 +24,11 @@ class DataController: NSObject {
     weak var delegate: DataControllerDelegate?
     var enableAutoMode: Bool {
         didSet {
+            if enableAutoMode == oldValue {
+                return
+            }
             for device in devices {
-                for decider in device.deciders {
-                    device.deciders = self.decidersForDevice( device )
-                }
+                device.deciders = decidersForDevice( device )
             }
             let defaults = NSUserDefaults.standardUserDefaults()
             let center = NSNotificationCenter.defaultCenter()
@@ -83,6 +84,10 @@ class DataController: NSObject {
         
         outerLoop: for device in devices {
             
+            if device.deciders.count == 0 || !device.online {
+                continue
+            }
+            
             var turnOn = true
             
             for decider in device.deciders {
@@ -119,7 +124,7 @@ class DataController: NSObject {
     
     private func decidersForDevice( device:SwitchedDevice ) -> [DecisionMakerProtocol] {
         
-        if !enableAutoMode {
+        if !enableAutoMode || !device.online {
             return []
         }
         

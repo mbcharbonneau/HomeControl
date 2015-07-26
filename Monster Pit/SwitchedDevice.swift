@@ -21,11 +21,16 @@ class SwitchedDevice: PFObject, PFSubclassing {
 
     var on: Bool {
         get { return self["on"] as! Bool }
-        set( newState ) { self["on"] = newState }
+        set { self["on"] = newValue }
     }
     
     var deciderClasses: [String] {
         get { return self["deciderTypes"] as! [String] }
+    }
+    
+    var online: Bool {
+        get { return self["online"] as! Bool }
+        set { self["online"] = newValue }
     }
     
     var isBusy: Bool {

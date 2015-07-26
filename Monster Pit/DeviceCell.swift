@@ -25,8 +25,8 @@ class DeviceCell: UICollectionViewCell {
 
         nameLabel?.text = device.name
         deciderLabel?.text = deciderString( device.deciders )
-        deviceSwitch?.enabled = !device.isBusy
         deviceSwitch?.setOn( device.on, animated: true )
+        deviceSwitch?.enabled = !device.isBusy && device.online
     }
     
     func setSwitchTarget( target: AnyObject?, action: Selector, identifier: Int ) {
