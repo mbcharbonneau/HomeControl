@@ -63,7 +63,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     // MARK: RootViewController Private
     
-    private let locationController = LocationController()
     private let dataController = DataController()
     private let colorGenerator = ColorGenerator()
     private let sensorCellIdentifier = "SensorCell"
@@ -80,7 +79,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
 
         colorGenerator.saturation = 0.3
         dataController.delegate = self
-        locationController.dataController = dataController
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -208,7 +206,17 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.reloadData()
     }
     
-    func dataController(controller: DataController, toggledDevices: [SwitchedDevice]) {
+    func dataController(controller: DataController, toggledDevice: SwitchedDevice) {
         collectionView?.reloadData()
+        
+        let interval: NSTimeInterval = 5.0
+        let action = toggledDevice.on ? "on" : "off"
+        let text = "I turned \(action) \(toggledDevice.name)."
+        let notification = UILocalNotification()
+        
+        notification.fireDate = NSDate(timeIntervalSinceNow: interval)
+        notification.alertBody = text
+        
+        UIApplication.sharedApplication().scheduleLocalNotification( notification )
     }
 }

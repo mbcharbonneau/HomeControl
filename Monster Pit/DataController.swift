@@ -11,10 +11,10 @@ import Parse
 
 protocol DataControllerDelegate: class {
     func dataControllerRefreshed(controller: DataController)
-    func dataController(controller: DataController, toggledDevices: [SwitchedDevice])
+    func dataController(controller: DataController, toggledDevice: SwitchedDevice )
 }
 
-class DataController {
+class DataController: NSObject {
     
     // MARK: DataController
     
@@ -23,6 +23,15 @@ class DataController {
     var lastUpdate: NSDate?
     weak var delegate: DataControllerDelegate?
 
+    override init() {
+        super.init()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("evaluateAutoDeciders:"), name: Constants.ForceEvaluationNotification, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.ForceEvaluationNotification, object: nil)
+    }
+    
     func refresh() {
 
         dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ) ) {
@@ -36,6 +45,11 @@ class DataController {
             dispatch_async( dispatch_get_main_queue() ) {
 
                 if let sensors = sensorResults as? [RoomSensor], devices = deviceResults as? [SwitchedDevice] {
+                    
+                    for device in devices {
+                        device.deciders = self.decidersForDevice( device )
+                    }
+                    
                     self.sensors = sensors
                     self.devices = devices
                     self.lastUpdate = NSDate()
@@ -45,38 +59,48 @@ class DataController {
         }
     }
     
-    func evaluateAutoDeciders(geofenceState: CLRegionState, beaconState: CLRegionState) {
+    func evaluateAutoDeciders(notification: NSNotification) {
         
-//        var changedDevices = [SwitchedDevice]()
-//        
-//        for device in devices {
-//            
-//            var turnOn = true
-//            var confused = false
-//            
-//            for decider in device.deciders {
-//                
-//                if ( decider.state == State.Unknown ) {
-//                    confused = true
-//                    break
-//                }
-//                
-//                let decision = decider.state == State.On;
-//                turnOn = turnOn && decision;
-//            }
-//            
-//            if confused {
-//                continue
-//            }
-//            
-//            if turnOn && !device.on {
-//                device.turnOn { ( error: NSError? ) -> Void in
-//                    self.collectionView?.reloadItemsAtIndexPaths([path])
-//                    device.saveInBackgroundWithBlock( nil )
-//                }
-//            } else if !turnOn && device.on {
-//                
-//            }
-//        }
+        println("Evaluating deciders...")
+        
+        outerLoop: for device in devices {
+            
+            var turnOn = true
+            
+            for decider in device.deciders {
+                
+                if ( decider.state == State.Unknown ) {
+                    break outerLoop
+                }
+                
+                let decision = decider.state == State.On;
+                turnOn = turnOn && decision;
+            }
+            
+            if turnOn && !device.on {
+                device.turnOn { ( error: NSError? ) -> Void in
+                    if ( error == nil ) {
+                        self.delegate?.dataController( self, toggledDevice: device )
+                    }
+                }
+            } else if !turnOn && device.on {
+                device.turnOff { ( error: NSError? ) -> Void in
+                    if ( error == nil ) {
+                        self.delegate?.dataController( self, toggledDevice: device )
+                    }
+                }
+            }
+        }
     }
+    
+    // MARK: DataController Private
+    
+    private let locationController = LocationController()
+    
+    private func decidersForDevice( device:SwitchedDevice ) -> [DecisionMakerProtocol] {
+        let beacon = BeaconDecider( locationController: locationController )
+        
+        return [beacon]
+    }
+
 }

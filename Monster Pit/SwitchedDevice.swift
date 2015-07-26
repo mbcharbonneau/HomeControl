@@ -69,6 +69,11 @@ class SwitchedDevice: PFObject, PFSubclassing {
 
             commandTask = session.dataTaskWithRequest( request, completionHandler: { ( data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                 dispatch_async( dispatch_get_main_queue(), { () -> Void in
+                    if let error = error {
+                        println("HTTP error: \(error)")
+                    } else {
+                        println("Finished request: \(response?.URL as NSURL!)")
+                    }
                     callback( error )
                     self.commandTask = nil
                 })

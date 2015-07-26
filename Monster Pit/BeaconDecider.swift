@@ -7,14 +7,30 @@
 //
 
 import Foundation
+import CoreLocation
 
 class BeaconDecider: DecisionMakerProtocol {
+    
+    var locationController: LocationController
+    
+    init( locationController: LocationController ) {
+        self.locationController = locationController
+    }
     
     var name: String {
         get { return "iBeacon" }
     }
     
     var state: State {
-        get { return State.On }
+        get {
+            switch locationController.beaconState {
+            case CLRegionState.Unknown:
+                return State.Unknown
+            case CLRegionState.Inside:
+                return State.Off
+            case CLRegionState.Outside:
+                return State.On
+            }
+        }
     }
 }

@@ -13,8 +13,9 @@ class LocationController: NSObject, CLLocationManagerDelegate {
     
     // MARK: LocationController
     
-    var dataController: DataController?
-
+    var beaconState = CLRegionState.Unknown
+    var geofenceState = CLRegionState.Unknown
+    
     // MARK: LocationController Private
     
     private let locationManager: CLLocationManager
@@ -60,11 +61,15 @@ class LocationController: NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
         switch region.identifier {
         case beaconRegion.identifier:
-            println("BEACON")
+            beaconState = state
+            println( "iBeacon region changed: \(state)" )
         case geofenceRegion.identifier:
-            println("GEOFENCE")
+            geofenceState = state
+            println( "Geofence region changed: \(state)" )
         default: ()
         }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
     }
     
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {

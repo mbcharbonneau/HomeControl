@@ -44,6 +44,8 @@
 		48A5FC3A1B64290E009D0893 /* SensorDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC391B64290E009D0893 /* SensorDecider.swift */; };
 		48A5FC3C1B64335E009D0893 /* BlockingDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC3B1B64335E009D0893 /* BlockingDecider.swift */; };
 		48A5FC3E1B6436E7009D0893 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC3D1B6436E7009D0893 /* LocationController.swift */; };
+		48A5FC401B645B8F009D0893 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC3F1B645B8F009D0893 /* Extensions.swift */; };
+		48A5FC421B646297009D0893 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC411B646297009D0893 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +132,8 @@
 		48A5FC391B64290E009D0893 /* SensorDecider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDecider.swift; sourceTree = "<group>"; };
 		48A5FC3B1B64335E009D0893 /* BlockingDecider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockingDecider.swift; sourceTree = "<group>"; };
 		48A5FC3D1B6436E7009D0893 /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
+		48A5FC3F1B645B8F009D0893 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		48A5FC411B646297009D0893 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +237,9 @@
 				481913271B5DBFDD00C8DB14 /* Images.xcassets */,
 				481913241B5DBFDD00C8DB14 /* Main.storyboard */,
 				481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */,
+				48A5FC3F1B645B8F009D0893 /* Extensions.swift */,
 				489477A51B619A7800FBFB67 /* Configuration.swift */,
+				48A5FC411B646297009D0893 /* Constants.swift */,
 				486B0B111B5DF5D600943145 /* Monster Pit.entitlements */,
 				4819131F1B5DBFDD00C8DB14 /* Info.plist */,
 			);
@@ -522,8 +528,10 @@
 				48A5FC321B642489009D0893 /* DecisionMakerProtocol.swift in Sources */,
 				48A5FC361B642863009D0893 /* GeofenceDecider.swift in Sources */,
 				481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */,
+				48A5FC401B645B8F009D0893 /* Extensions.swift in Sources */,
 				48A0A19D1B61B17F000DA626 /* ColorGenerator.swift in Sources */,
 				486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */,
+				48A5FC421B646297009D0893 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
