@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VbQ-T5-QjR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bwr-GQ-8se">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Ywe-zH-S93">
+            <objects>
+                <navigationController id="Bwr-GQ-8se" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="q2Z-6h-VWI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VbQ-T5-QjR" kind="relationship" relationship="rootViewController" id="jMR-il-Mur"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3gE-xo-WF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="296" y="233"/>
+        </scene>
         <!--Root View Controller-->
         <scene sceneID="bi5-dA-cWV">
             <objects>
@@ -16,8 +32,8 @@
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NU1-bn-r0K">
                             <size key="itemSize" width="150" height="120"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="50" height="60"/>
-                            <inset key="sectionInset" minX="20" minY="40" maxX="20" maxY="20"/>
+                            <size key="footerReferenceSize" width="50" height="16"/>
+                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SensorCell" id="JfT-jT-QIw" customClass="RoomSensorCell" customModule="Monster_Pit" customModuleProvider="target">
@@ -128,31 +144,15 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRf-gN-wZb">
-                                    <rect key="frame" x="298" y="58" width="5" height="15"/>
+                                    <rect key="frame" x="298" y="1" width="5" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lny-jQ-1pd">
-                                    <rect key="frame" x="18" y="8" width="564" height="40"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="NjQ-dV-05v"/>
-                                    </constraints>
-                                    <state key="normal" title="Auto Mode">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="toggleAutoMode:" destination="VbQ-T5-QjR" eventType="touchUpInside" id="j5O-Yy-I8w"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="trailingMargin" secondItem="lny-jQ-1pd" secondAttribute="trailing" constant="10" id="5ox-Z4-dgA"/>
-                                <constraint firstItem="MRf-gN-wZb" firstAttribute="top" secondItem="lny-jQ-1pd" secondAttribute="bottom" constant="10" id="Rg7-86-x2D"/>
-                                <constraint firstItem="lny-jQ-1pd" firstAttribute="leading" secondItem="rcS-Zt-kH2" secondAttribute="leadingMargin" constant="10" id="ZjO-XU-p2g"/>
+                                <constraint firstAttribute="centerY" secondItem="MRf-gN-wZb" secondAttribute="centerY" id="Q2J-FN-sLb"/>
                                 <constraint firstAttribute="centerX" secondItem="MRf-gN-wZb" secondAttribute="centerX" id="nzd-I3-gaJ"/>
-                                <constraint firstItem="lny-jQ-1pd" firstAttribute="top" secondItem="rcS-Zt-kH2" secondAttribute="topMargin" id="wKD-0y-g6w"/>
                             </constraints>
                         </collectionReusableView>
                         <connections>
@@ -160,6 +160,13 @@
                             <outlet property="delegate" destination="VbQ-T5-QjR" id="5aN-qp-gTe"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="3cG-t3-z2D">
+                        <barButtonItem key="leftBarButtonItem" title="Auto" id="uGJ-lm-4zd">
+                            <connections>
+                                <action selector="toggleAutoMode:" destination="VbQ-T5-QjR" id="gIK-PM-K0g"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riR-Uz-lC4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

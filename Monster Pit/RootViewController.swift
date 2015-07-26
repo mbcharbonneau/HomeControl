@@ -32,7 +32,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         sender.enabled = false
     }
     
-    @IBAction func toggleAutoMode( sender: UIButton ) {
+    @IBAction func toggleAutoMode( sender: AnyObject! ) {
         dataController.enableAutoMode = !dataController.enableAutoMode
         collectionView?.reloadSections(NSIndexSet(index: 1))
     }
@@ -162,11 +162,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
             if let label = footer.viewWithTag( 100 ) as? UILabel {
                 updateLabel = label
             }
-            if let button = footer.viewWithTag( 101 ) as? UIButton {
-                toggleAutoButton = button
-                toggleAutoButton?.layer.cornerRadius = 6.0
-                toggleAutoButton?.backgroundColor = UIColor.orangeColor()
-            }
             return footer
         default:
             assert( false, "invalid element" )
@@ -194,7 +189,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         switch section {
         case 0:
-            return UIEdgeInsetsMake( 40.0, 20.0, 20.0, 20.0 )
+            return UIEdgeInsetsMake( 20.0, 20.0, 20.0, 20.0 )
         case 1:
             return UIEdgeInsetsMake( 0.0, 20.0, 20.0, 20.0 )
         default:
@@ -207,7 +202,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         case 0:
             return CGSizeZero
         case 1:
-            return CGSizeMake( collectionView.frame.width, 75.0 )
+            return CGSizeMake( collectionView.frame.width, 16.0 )
         default:
             assert( false, "invalid section" )
         }
