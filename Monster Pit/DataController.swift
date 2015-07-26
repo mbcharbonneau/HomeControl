@@ -54,14 +54,14 @@ class DataController: NSObject {
                     self.devices = devices
                     self.lastUpdate = NSDate()
                     self.delegate?.dataControllerRefreshed(self)
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
                 }
             }
         }
     }
     
     func evaluateAutoDeciders(notification: NSNotification) {
-        
-        println("Evaluating deciders...")
         
         outerLoop: for device in devices {
             

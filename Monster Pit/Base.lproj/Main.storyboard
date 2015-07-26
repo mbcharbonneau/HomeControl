@@ -88,7 +88,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;&lt; name &gt;&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vab-UW-EwW">
-                                            <rect key="frame" x="8" y="49" width="94" height="21"/>
+                                            <rect key="frame" x="8" y="44" width="94" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -99,16 +99,25 @@
                                                 <action selector="toggleDeviceOnOff:" destination="PCB-Ej-4ea" eventType="valueChanged" id="Vei-V5-ZdQ"/>
                                             </connections>
                                         </switch>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;&lt; state &gt;&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJe-XS-LJ5">
+                                            <rect key="frame" x="8" y="65" width="55" height="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="lca-bN-L8F" firstAttribute="trailing" secondItem="PCB-Ej-4ea" secondAttribute="trailingMargin" id="7eP-ZS-N0N"/>
+                                    <constraint firstItem="KJe-XS-LJ5" firstAttribute="leading" secondItem="PCB-Ej-4ea" secondAttribute="leadingMargin" id="PUT-Tj-085"/>
+                                    <constraint firstItem="KJe-XS-LJ5" firstAttribute="top" secondItem="vab-UW-EwW" secondAttribute="bottom" id="WMs-h5-dbd"/>
                                     <constraint firstItem="vab-UW-EwW" firstAttribute="leading" secondItem="PCB-Ej-4ea" secondAttribute="leadingMargin" id="q1T-Bl-jSu"/>
                                     <constraint firstAttribute="centerY" secondItem="lca-bN-L8F" secondAttribute="centerY" id="rh5-50-SGx"/>
-                                    <constraint firstAttribute="centerY" secondItem="vab-UW-EwW" secondAttribute="centerY" id="yHY-8l-A20"/>
+                                    <constraint firstAttribute="centerY" secondItem="vab-UW-EwW" secondAttribute="centerY" constant="6" id="yHY-8l-A20"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="deciderLabel" destination="KJe-XS-LJ5" id="5RZ-Tp-pBp"/>
                                     <outlet property="deviceSwitch" destination="lca-bN-L8F" id="qHE-MZ-lv3"/>
                                     <outlet property="nameLabel" destination="vab-UW-EwW" id="aPG-oC-GYw"/>
                                 </connections>

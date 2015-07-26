@@ -11,11 +11,13 @@ import UIKit
 class DeviceCell: UICollectionViewCell {
 
     @IBOutlet weak private var nameLabel: UILabel?
+    @IBOutlet weak private var deciderLabel: UILabel?
     @IBOutlet weak private var deviceSwitch: UISwitch?
 
     func configureWithDevice( device: SwitchedDevice ) {
 
         nameLabel?.text = device.name
+        deciderLabel?.text = deciderString( device.deciders )
         deviceSwitch?.enabled = !device.isBusy
         deviceSwitch?.setOn( device.on, animated: true )
     }
@@ -25,5 +27,18 @@ class DeviceCell: UICollectionViewCell {
         deviceSwitch?.removeTarget( nil, action: nil, forControlEvents: UIControlEvents.ValueChanged )
         deviceSwitch?.addTarget( target, action: action, forControlEvents: UIControlEvents.ValueChanged )
         deviceSwitch?.tag = identifier
+    }
+    
+    private func deciderString( deciders: [DecisionMakerProtocol] ) -> String {
+        var string = String()
+        
+        for decider in deciders {
+            if !string.isEmpty {
+                string += ", "
+            }
+            string += "\(decider.name) (\(decider.state))"
+        }
+        
+        return string
     }
 }

@@ -68,7 +68,6 @@ class LocationController: NSObject, CLLocationManagerDelegate {
             println( "Geofence region changed: \(state)" )
         default: ()
         }
-        
         NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
     }
     

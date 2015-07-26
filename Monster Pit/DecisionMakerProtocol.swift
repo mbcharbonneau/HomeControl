@@ -16,7 +16,7 @@ enum State: Printable {
     var description: String {
         switch self {
         case Unknown:
-            return "???"
+            return "?"
         case On:
             return "on"
         case Off:
