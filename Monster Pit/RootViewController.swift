@@ -15,6 +15,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     @IBAction func toggleDeviceOnOff( sender: UISwitch ) {
         
         dataController.enableAutoMode = false
+        toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
         
         let device = dataController.devices[sender.tag]
         let path = NSIndexPath(forItem: sender.tag, inSection: 1)
@@ -34,6 +35,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     @IBAction func toggleAutoMode( sender: AnyObject! ) {
         dataController.enableAutoMode = !dataController.enableAutoMode
+        toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
         collectionView?.reloadSections(NSIndexSet(index: 1))
     }
     
@@ -78,7 +80,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     private var updateCellsTimer: NSTimer?
     private var updateDataTimer: NSTimer?
     private weak var updateLabel: UILabel?
-    private weak var toggleAutoButton: UIButton?
+    @IBOutlet private weak var toggleAutoButton: UIBarButtonItem?
     
     // MARK: UIViewController
     
@@ -87,6 +89,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
 
         colorGenerator.saturation = 0.3
         dataController.delegate = self
+        toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -180,7 +183,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
             let width = ( collectionView.frame.size.width - layout.minimumInteritemSpacing - margins ) / 2.0
             return CGSizeMake( width, width * 0.8 )
         case 1:
-            return CGSizeMake( collectionView.frame.size.width - margins, 50.0 )
+            return CGSizeMake( collectionView.frame.size.width - margins, 60.0 )
         default:
             assert( false, "invalid section" )
         }
@@ -202,7 +205,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         case 0:
             return CGSizeZero
         case 1:
-            return CGSizeMake( collectionView.frame.width, 16.0 )
+            return CGSizeMake( collectionView.frame.width, 34.0 )
         default:
             assert( false, "invalid section" )
         }

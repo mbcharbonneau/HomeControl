@@ -32,7 +32,7 @@
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NU1-bn-r0K">
                             <size key="itemSize" width="150" height="120"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="50" height="16"/>
+                            <size key="footerReferenceSize" width="50" height="26"/>
                             <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
                         </collectionViewFlowLayout>
                         <cells>
@@ -144,14 +144,14 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRf-gN-wZb">
-                                    <rect key="frame" x="298" y="1" width="5" height="15"/>
+                                    <rect key="frame" x="298" y="0.0" width="5" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="centerY" secondItem="MRf-gN-wZb" secondAttribute="centerY" id="Q2J-FN-sLb"/>
+                                <constraint firstItem="MRf-gN-wZb" firstAttribute="top" secondItem="rcS-Zt-kH2" secondAttribute="top" id="hNr-NH-AQb"/>
                                 <constraint firstAttribute="centerX" secondItem="MRf-gN-wZb" secondAttribute="centerX" id="nzd-I3-gaJ"/>
                             </constraints>
                         </collectionReusableView>
@@ -161,12 +161,15 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="3cG-t3-z2D">
-                        <barButtonItem key="leftBarButtonItem" title="Auto" id="uGJ-lm-4zd">
+                        <barButtonItem key="leftBarButtonItem" title="Automatic" id="uGJ-lm-4zd">
                             <connections>
                                 <action selector="toggleAutoMode:" destination="VbQ-T5-QjR" id="gIK-PM-K0g"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="toggleAutoButton" destination="uGJ-lm-4zd" id="ncp-hp-ykF"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riR-Uz-lC4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -24,6 +24,10 @@ class SwitchedDevice: PFObject, PFSubclassing {
         set( newState ) { self["on"] = newState }
     }
     
+    var deciderClasses: [String] {
+        get { return self["deciderTypes"] as! [String] }
+    }
+    
     var isBusy: Bool {
         get { return commandTask != nil && commandTask?.state != NSURLSessionTaskState.Completed }
     }

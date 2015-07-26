@@ -55,6 +55,9 @@ class DataController: NSObject {
 
             let sensorQuery = PFQuery(className: "Sensor")
             let deviceQuery = PFQuery(className: "Device")
+            
+            sensorQuery.orderByAscending( "createdAt" )
+            deviceQuery.orderByAscending( "createdAt" )
 
             let sensorResults = sensorQuery.findObjects()
             let deviceResults = deviceQuery.findObjects()
@@ -117,11 +120,25 @@ class DataController: NSObject {
     private let locationController = LocationController()
     
     private func decidersForDevice( device:SwitchedDevice ) -> [DecisionMakerProtocol] {
-        let beacon = BeaconDecider( locationController: locationController )
-        let geofence = GeofenceDecider( locationController: locationController )
-        let blocker = BlockingDecider( blockOtherDeciders: !self.enableAutoMode )
         
-        return [blocker, beacon, geofence]
-    }
+        var array = [DecisionMakerProtocol]()
+        let types = device.deciderClasses
+        
+        if contains( types, "BlockingDecider" ) {
+            let blocker = BlockingDecider( blockOtherDeciders: !self.enableAutoMode )
+            array.append( blocker )
+        }
 
+        if contains( types, "BeaconDecider" ) {
+            let beacon = BeaconDecider( locationController: locationController )
+            array.append( beacon )
+        }
+        
+        if contains( types, "GeofenceDecider" ) {
+            let geofence = GeofenceDecider( locationController: locationController )
+            array.append( geofence )
+        }
+                
+        return array
+    }
 }
