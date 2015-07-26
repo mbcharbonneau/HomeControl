@@ -14,6 +14,13 @@ class DeviceCell: UICollectionViewCell {
     @IBOutlet weak private var deciderLabel: UILabel?
     @IBOutlet weak private var deviceSwitch: UISwitch?
 
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder:aDecoder)
+        
+        backgroundColor = UIColor.whiteColor()
+        layer.cornerRadius = 6.0
+    }
+
     func configureWithDevice( device: SwitchedDevice ) {
 
         nameLabel?.text = device.name
@@ -39,6 +46,6 @@ class DeviceCell: UICollectionViewCell {
             string += "\(decider.name) (\(decider.state))"
         }
         
-        return string
+        return string.isEmpty ? "Manual Only" : string
     }
 }

@@ -18,6 +18,13 @@ class RoomSensorCell: UICollectionViewCell {
     
     private var lastUpdate: NSDate?
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder:aDecoder)
+        
+        backgroundColor = UIColor(red: 231.0/255.0, green: 55.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+        layer.cornerRadius = 6.0
+    }
+    
     func configureWithSensor( sensor: RoomSensor ) {
 
         nameLabel?.text = sensor.name

@@ -36,7 +36,6 @@
 		489477A11B619A4700FBFB67 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894779B1B619A4700FBFB67 /* ParseFacebookUtilsV4.framework */; };
 		489477A21B619A4700FBFB67 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894779C1B619A4700FBFB67 /* ParseUI.framework */; };
 		489477A61B619A7800FBFB67 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489477A51B619A7800FBFB67 /* Configuration.swift */; };
-		48A0A19D1B61B17F000DA626 /* ColorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0A19C1B61B17F000DA626 /* ColorGenerator.swift */; };
 		48A5FC301B6420FF009D0893 /* StatusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC2F1B6420FF009D0893 /* StatusIndicatorView.swift */; };
 		48A5FC321B642489009D0893 /* DecisionMakerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC311B642489009D0893 /* DecisionMakerProtocol.swift */; };
 		48A5FC361B642863009D0893 /* GeofenceDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC351B642863009D0893 /* GeofenceDecider.swift */; };
@@ -124,7 +123,6 @@
 		4894779B1B619A4700FBFB67 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		4894779C1B619A4700FBFB67 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		489477A51B619A7800FBFB67 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = "../../../Dropbox/Monster Pit/Configuration.swift"; sourceTree = "<group>"; };
-		48A0A19C1B61B17F000DA626 /* ColorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorGenerator.swift; sourceTree = "<group>"; };
 		48A5FC2F1B6420FF009D0893 /* StatusIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusIndicatorView.swift; sourceTree = "<group>"; };
 		48A5FC311B642489009D0893 /* DecisionMakerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecisionMakerProtocol.swift; sourceTree = "<group>"; };
 		48A5FC351B642863009D0893 /* GeofenceDecider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeofenceDecider.swift; sourceTree = "<group>"; };
@@ -231,7 +229,6 @@
 		4819131E1B5DBFDD00C8DB14 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				48A0A19B1B61B169000DA626 /* ColorGenerator */,
 				489477A31B619A4C00FBFB67 /* Parse */,
 				489477A41B619A5300FBFB67 /* Frameworks */,
 				481913271B5DBFDD00C8DB14 /* Images.xcassets */,
@@ -325,14 +322,6 @@
 			);
 			name = Frameworks;
 			path = ..;
-			sourceTree = "<group>";
-		};
-		48A0A19B1B61B169000DA626 /* ColorGenerator */ = {
-			isa = PBXGroup;
-			children = (
-				48A0A19C1B61B17F000DA626 /* ColorGenerator.swift */,
-			);
-			name = ColorGenerator;
 			sourceTree = "<group>";
 		};
 		48A5FC331B642528009D0893 /* Controllers */ = {
@@ -529,7 +518,6 @@
 				48A5FC361B642863009D0893 /* GeofenceDecider.swift in Sources */,
 				481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */,
 				48A5FC401B645B8F009D0893 /* Extensions.swift in Sources */,
-				48A0A19D1B61B17F000DA626 /* ColorGenerator.swift in Sources */,
 				486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */,
 				48A5FC421B646297009D0893 /* Constants.swift in Sources */,
 			);

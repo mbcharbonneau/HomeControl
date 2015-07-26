@@ -73,7 +73,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     // MARK: RootViewController Private
     
     private let dataController = DataController()
-    private let colorGenerator = ColorGenerator()
     private let sensorCellIdentifier = "SensorCell"
     private let deviceCellIdentifier = "DeviceCell"
     private let footerIdentifier = "Footer"
@@ -87,7 +86,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        colorGenerator.saturation = 0.3
+        collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         dataController.delegate = self
         toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
     }
@@ -132,25 +131,13 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier( sensorCellIdentifier, forIndexPath: indexPath) as! RoomSensorCell
-
-            if ( cell.backgroundColor == nil ) {
-                cell.backgroundColor = colorGenerator.randomColor()
-            }
-
             cell.configureWithSensor( dataController.sensors[indexPath.row] )
-            
             return cell
 
         case 1:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier( deviceCellIdentifier, forIndexPath: indexPath) as! DeviceCell
-
-            if ( cell.backgroundColor == nil ) {
-                cell.backgroundColor = colorGenerator.randomColor()
-            }
-
             cell.configureWithDevice( dataController.devices[indexPath.row] )
             cell.setSwitchTarget( self, action: Selector("toggleDeviceOnOff:"), identifier: indexPath.row )
-
             return cell
         default:
             assert( false, "invalid section" )
@@ -192,7 +179,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         switch section {
         case 0:
-            return UIEdgeInsetsMake( 20.0, 20.0, 20.0, 20.0 )
+            return UIEdgeInsetsMake( 20.0, 20.0, 10.0, 20.0 )
         case 1:
             return UIEdgeInsetsMake( 0.0, 20.0, 20.0, 20.0 )
         default:
