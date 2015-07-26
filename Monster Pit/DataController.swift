@@ -69,6 +69,8 @@ class DataController: NSObject {
             
             for decider in device.deciders {
                 
+                println( "\(decider.name) wants \(device.name) to be \(decider.state)." );
+                
                 if ( decider.state == State.Unknown ) {
                     break outerLoop
                 }
@@ -99,8 +101,9 @@ class DataController: NSObject {
     
     private func decidersForDevice( device:SwitchedDevice ) -> [DecisionMakerProtocol] {
         let beacon = BeaconDecider( locationController: locationController )
+        let geofence = GeofenceDecider( locationController: locationController )
         
-        return [beacon]
+        return [beacon, geofence]
     }
 
 }

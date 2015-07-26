@@ -8,10 +8,21 @@
 
 import Foundation
 
-enum State {
+enum State: Printable {
     case On
     case Off
     case Unknown
+    
+    var description: String {
+        switch self {
+        case Unknown:
+            return "???"
+        case On:
+            return "on"
+        case Off:
+            return "off"
+        }
+    }
 }
 
 protocol DecisionMakerProtocol {
