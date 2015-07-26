@@ -12,12 +12,14 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     // MARK: RootViewController
     
-    @IBAction func toggleDeviceOnOff( control: UISwitch ) {
+    @IBAction func toggleDeviceOnOff( sender: UISwitch ) {
         
-        let device = dataController.devices[control.tag]
-        let path = NSIndexPath(forItem: control.tag, inSection: 1)
+        dataController.enableAutoMode = false
         
-        if control.on {
+        let device = dataController.devices[sender.tag]
+        let path = NSIndexPath(forItem: sender.tag, inSection: 1)
+        
+        if sender.on {
             device.turnOn { ( error: NSError? ) -> Void in
                 self.collectionView?.reloadItemsAtIndexPaths([path])
             }
@@ -27,7 +29,12 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
             }
         }
 
-        control.enabled = false
+        sender.enabled = false
+    }
+    
+    @IBAction func toggleAutoMode( sender: UIButton ) {
+        dataController.enableAutoMode = !dataController.enableAutoMode
+        collectionView?.reloadSections(NSIndexSet(index: 1))
     }
     
     func refreshDataSource( timer: NSTimer ) {
@@ -71,6 +78,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     private var updateCellsTimer: NSTimer?
     private var updateDataTimer: NSTimer?
     private weak var updateLabel: UILabel?
+    private weak var toggleAutoButton: UIButton?
     
     // MARK: UIViewController
     
@@ -154,6 +162,11 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
             if let label = footer.viewWithTag( 100 ) as? UILabel {
                 updateLabel = label
             }
+            if let button = footer.viewWithTag( 101 ) as? UIButton {
+                toggleAutoButton = button
+                toggleAutoButton?.layer.cornerRadius = 6.0
+                toggleAutoButton?.backgroundColor = UIColor.orangeColor()
+            }
             return footer
         default:
             assert( false, "invalid element" )
@@ -194,7 +207,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         case 0:
             return CGSizeZero
         case 1:
-            return CGSizeMake( collectionView.frame.width, 16.0 )
+            return CGSizeMake( collectionView.frame.width, 75.0 )
         default:
             assert( false, "invalid section" )
         }

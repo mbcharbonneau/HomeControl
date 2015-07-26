@@ -11,8 +11,18 @@ import Foundation
 class BlockingDecider: DecisionMakerProtocol {
     
     var name: String {
-        get { return "Enable Intelligence" }
+        get { return "Auto Enable" }
     }
     
-    var state = State.On
+    var blockOtherDeciders: Bool
+    
+    var state: State {
+        get {
+            return blockOtherDeciders ? State.Unknown : State.On
+        }
+    }
+    
+    init( blockOtherDeciders: Bool ) {
+        self.blockOtherDeciders = blockOtherDeciders
+    }
 }

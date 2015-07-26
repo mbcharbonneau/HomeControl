@@ -22,10 +22,27 @@ class DataController: NSObject {
     var devices = [SwitchedDevice]()
     var lastUpdate: NSDate?
     weak var delegate: DataControllerDelegate?
+    var enableAutoMode: Bool {
+        didSet {
+            for device in devices {
+                for decider in device.deciders {
+                    if let decider = decider as? BlockingDecider {
+                        decider.blockOtherDeciders = !self.enableAutoMode
+                    }
+                }
+            }
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let center = NSNotificationCenter.defaultCenter()
+            defaults.setBool( self.enableAutoMode, forKey: Constants.EnableAutoModeDefaultsKey )
+            defaults.synchronize()
+            center.postNotificationName(Constants.ForceEvaluationNotification, object: self)
+        }
+    }
 
     override init() {
+        self.enableAutoMode = NSUserDefaults.standardUserDefaults().boolForKey(Constants.EnableAutoModeDefaultsKey)
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("evaluateAutoDeciders:"), name: Constants.ForceEvaluationNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("evaluateDeciders:"), name: Constants.ForceEvaluationNotification, object: nil)
     }
     
     deinit {
@@ -61,7 +78,7 @@ class DataController: NSObject {
         }
     }
     
-    func evaluateAutoDeciders(notification: NSNotification) {
+    func evaluateDeciders(notification: NSNotification) {
         
         outerLoop: for device in devices {
             
@@ -72,7 +89,7 @@ class DataController: NSObject {
                 println( "\(decider.name) wants \(device.name) to be \(decider.state)." );
                 
                 if ( decider.state == State.Unknown ) {
-                    break outerLoop
+                    continue outerLoop
                 }
                 
                 let decision = decider.state == State.On;
@@ -102,8 +119,9 @@ class DataController: NSObject {
     private func decidersForDevice( device:SwitchedDevice ) -> [DecisionMakerProtocol] {
         let beacon = BeaconDecider( locationController: locationController )
         let geofence = GeofenceDecider( locationController: locationController )
+        let blocker = BlockingDecider( blockOtherDeciders: !self.enableAutoMode )
         
-        return [beacon, geofence]
+        return [blocker, beacon, geofence]
     }
 
 }
