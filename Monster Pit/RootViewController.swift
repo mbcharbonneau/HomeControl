@@ -36,7 +36,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     @IBAction func toggleAutoMode( sender: AnyObject! ) {
         dataController.enableAutoMode = !dataController.enableAutoMode
         toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
-        collectionView?.reloadSections(NSIndexSet(index: 1))
     }
     
     func refreshDataSource( timer: NSTimer ) {
@@ -205,7 +204,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func dataController(controller: DataController, toggledDevice: SwitchedDevice) {
-        collectionView?.reloadData()
+        collectionView?.reloadSections(NSIndexSet(index: 1))
         
         let interval: NSTimeInterval = 5.0
         let action = toggledDevice.on ? "on" : "off"

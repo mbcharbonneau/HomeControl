@@ -26,9 +26,7 @@ class DataController: NSObject {
         didSet {
             for device in devices {
                 for decider in device.deciders {
-                    if let decider = decider as? BlockingDecider {
-                        decider.blockOtherDeciders = !self.enableAutoMode
-                    }
+                    device.deciders = self.decidersForDevice( device )
                 }
             }
             let defaults = NSUserDefaults.standardUserDefaults()
@@ -121,14 +119,13 @@ class DataController: NSObject {
     
     private func decidersForDevice( device:SwitchedDevice ) -> [DecisionMakerProtocol] {
         
+        if !enableAutoMode {
+            return []
+        }
+        
         var array = [DecisionMakerProtocol]()
         let types = device.deciderClasses
         
-        if contains( types, "BlockingDecider" ) {
-            let blocker = BlockingDecider( blockOtherDeciders: !self.enableAutoMode )
-            array.append( blocker )
-        }
-
         if contains( types, "BeaconDecider" ) {
             let beacon = BeaconDecider( locationController: locationController )
             array.append( beacon )
