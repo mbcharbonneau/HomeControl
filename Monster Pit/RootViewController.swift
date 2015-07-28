@@ -14,10 +14,16 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     @IBAction func toggleDeviceOnOff( sender: UISwitch ) {
         
-        dataController.enableAutoMode = false
-        toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
-        
         let device = dataController.devices[sender.tag]
+
+        // Switch the app into manual mode, but only if this device has some
+        // deciders we're overriding.
+        
+        if device.deciders.count > 0 {
+            dataController.enableAutoMode = false
+            toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
+        }
+        
         let path = NSIndexPath(forItem: sender.tag, inSection: 1)
         let block = { ( error: NSError? ) -> Void in
             if error != nil {
@@ -33,6 +39,8 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
             device.turnOff( block )
         }
 
+        // Disable the UISwitch until the web request completes.
+        
         sender.enabled = false
     }
     
@@ -183,7 +191,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         switch section {
         case 0:
-            return UIEdgeInsetsMake( 20.0, 20.0, 10.0, 20.0 )
+            return UIEdgeInsetsMake( 20.0, 20.0, 20.0, 20.0 )
         case 1:
             return UIEdgeInsetsMake( 0.0, 20.0, 20.0, 20.0 )
         default:
@@ -218,6 +226,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         notification.fireDate = NSDate(timeIntervalSinceNow: interval)
         notification.alertBody = text
+        notification.soundName = UILocalNotificationDefaultSoundName;
         
         UIApplication.sharedApplication().scheduleLocalNotification( notification )
     }
