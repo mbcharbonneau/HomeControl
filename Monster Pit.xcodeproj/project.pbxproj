@@ -44,6 +44,7 @@
 		48A5FC3E1B6436E7009D0893 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC3D1B6436E7009D0893 /* LocationController.swift */; };
 		48A5FC401B645B8F009D0893 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC3F1B645B8F009D0893 /* Extensions.swift */; };
 		48A5FC421B646297009D0893 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC411B646297009D0893 /* Constants.swift */; };
+		48A5FC441B6578A9009D0893 /* SlidingToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC431B6578A9009D0893 /* SlidingToggleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		48A5FC3D1B6436E7009D0893 /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		48A5FC3F1B645B8F009D0893 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		48A5FC411B646297009D0893 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		48A5FC431B6578A9009D0893 /* SlidingToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingToggleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 				481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */,
 				4817BAE81B629C3B0092E6C8 /* DeviceCell.swift */,
 				48A5FC2F1B6420FF009D0893 /* StatusIndicatorView.swift */,
+				48A5FC431B6578A9009D0893 /* SlidingToggleButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48A5FC441B6578A9009D0893 /* SlidingToggleButton.swift in Sources */,
 				48A5FC3E1B6436E7009D0893 /* LocationController.swift in Sources */,
 				489477A61B619A7800FBFB67 /* Configuration.swift in Sources */,
 				481913231B5DBFDD00C8DB14 /* RootViewController.swift in Sources */,

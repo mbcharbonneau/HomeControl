@@ -82,6 +82,39 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
+    func scheduleNotifications( timer: NSTimer ) {
+        
+        let notification = UILocalNotification()
+        
+        notification.fireDate = NSDate()
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        
+        switch notificationDevices.count {
+        case 1:
+            let device = notificationDevices[0]
+            let action = device.on ? "on" : "off"
+            notification.alertBody = "I turned \(action) \(device.name)."
+        default:
+            let turnedOn = notificationDevices.filter({ $0.on == true }).count
+            let turnedOff = notificationDevices.filter({ $0.on == false }).count
+            var actionString = ""
+            
+            if turnedOn > 0 {
+                actionString += "I turned on \(turnedOn) devices. "
+            }
+            if turnedOff > 0 {
+                actionString += "I turned off \(turnedOff) devices. "
+            }
+            
+            notification.alertBody = actionString
+        }
+        
+        UIApplication.sharedApplication().scheduleLocalNotification( notification )
+        
+        notificationCoalescingTimer = nil
+        notificationDevices.removeAll(keepCapacity: false)
+    }
+    
     // MARK: RootViewController Private
     
     private let dataController = DataController()
@@ -90,6 +123,8 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     private let footerIdentifier = "Footer"
     private var updateCellsTimer: NSTimer?
     private var updateDataTimer: NSTimer?
+    private var notificationCoalescingTimer: NSTimer?
+    private var notificationDevices = [SwitchedDevice]()
     private weak var updateLabel: UILabel?
     @IBOutlet private weak var toggleAutoButton: UIBarButtonItem?
     
@@ -218,16 +253,16 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     func dataController(controller: DataController, toggledDevice: SwitchedDevice) {
         collectionView?.reloadSections(NSIndexSet(index: 1))
+
+        // If there are multiple notifications, group them into one (also it
+        // takes several seconds for the switches to receive the command so 
+        // there's no sense in showing a notification immediately).
+
+        if let timer = notificationCoalescingTimer {
+            timer.invalidate()
+        }
         
-        let interval: NSTimeInterval = 5.0
-        let action = toggledDevice.on ? "on" : "off"
-        let text = "I turned \(action) \(toggledDevice.name)."
-        let notification = UILocalNotification()
-        
-        notification.fireDate = NSDate(timeIntervalSinceNow: interval)
-        notification.alertBody = text
-        notification.soundName = UILocalNotificationDefaultSoundName;
-        
-        UIApplication.sharedApplication().scheduleLocalNotification( notification )
+        notificationDevices.append(toggledDevice)
+        notificationCoalescingTimer = NSTimer.scheduledTimerWithTimeInterval( 5.0, target: self, selector: Selector("scheduleNotifications:"), userInfo: nil, repeats: false)
     }
 }
