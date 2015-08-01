@@ -21,7 +21,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         if device.deciders.count > 0 {
             dataController.enableAutoMode = false
-            toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
+            toggleAutoButton?.on = dataController.enableAutoMode
         }
         
         let path = NSIndexPath(forItem: sender.tag, inSection: 1)
@@ -44,9 +44,8 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         sender.enabled = false
     }
     
-    @IBAction func toggleAutoMode( sender: AnyObject! ) {
-        dataController.enableAutoMode = !dataController.enableAutoMode
-        toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
+    @IBAction func toggleAutoMode( sender: SlidingToggleButton ) {
+        dataController.enableAutoMode = sender.on
     }
     
     func refreshDataSource( timer: NSTimer ) {
@@ -126,8 +125,13 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     private var notificationCoalescingTimer: NSTimer?
     private var notificationDevices = [SwitchedDevice]()
     private weak var updateLabel: UILabel?
-    @IBOutlet private weak var toggleAutoButton: UIBarButtonItem?
     
+    @IBOutlet private weak var toggleAutoButton: SlidingToggleButton? {
+        didSet {
+            toggleAutoButton?.on = dataController.enableAutoMode
+        }
+    }
+        
     // MARK: UIViewController
     
     override func viewDidLoad() {
@@ -135,7 +139,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
 
         collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         dataController.delegate = self
-        toggleAutoButton?.title = dataController.enableAutoMode ? "Automatic" : "Manual"
     }
     
     override func viewDidAppear(animated: Bool) {

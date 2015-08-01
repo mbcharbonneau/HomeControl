@@ -140,7 +140,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Footer" id="rcS-Zt-kH2">
-                            <rect key="frame" x="0.0" y="180" width="600" height="20"/>
+                            <rect key="frame" x="0.0" y="224" width="600" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRf-gN-wZb">
@@ -161,14 +161,22 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="3cG-t3-z2D">
-                        <barButtonItem key="leftBarButtonItem" title="Automatic" id="uGJ-lm-4zd">
-                            <connections>
-                                <action selector="toggleAutoMode:" destination="VbQ-T5-QjR" id="gIK-PM-K0g"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" id="647-24-h1K">
+                            <view key="customView" contentMode="scaleToFill" id="kGO-y2-5xS" customClass="SlidingToggleButton" customModule="Monster_Pit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="133" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Automatic"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="toggleAutoMode:" destination="VbQ-T5-QjR" eventType="valueChanged" id="oAO-d5-yuR"/>
+                                </connections>
+                            </view>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="toggleAutoButton" destination="uGJ-lm-4zd" id="ncp-hp-ykF"/>
+                        <outlet property="toggleAutoButton" destination="kGO-y2-5xS" id="n0n-v1-0eB"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riR-Uz-lC4" userLabel="First Responder" sceneMemberID="firstResponder"/>
