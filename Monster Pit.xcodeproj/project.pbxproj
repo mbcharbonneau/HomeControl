@@ -45,6 +45,7 @@
 		48A5FC401B645B8F009D0893 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC3F1B645B8F009D0893 /* Extensions.swift */; };
 		48A5FC421B646297009D0893 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC411B646297009D0893 /* Constants.swift */; };
 		48A5FC441B6578A9009D0893 /* SlidingToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC431B6578A9009D0893 /* SlidingToggleButton.swift */; };
+		48C96EDF1B6D657000B860B4 /* AutoMonsterIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C96EDE1B6D657000B860B4 /* AutoMonsterIcon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		48A5FC3F1B645B8F009D0893 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		48A5FC411B646297009D0893 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		48A5FC431B6578A9009D0893 /* SlidingToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingToggleButton.swift; sourceTree = "<group>"; };
+		48C96EDE1B6D657000B860B4 /* AutoMonsterIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AutoMonsterIcon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +236,7 @@
 				481913271B5DBFDD00C8DB14 /* Images.xcassets */,
 				481913241B5DBFDD00C8DB14 /* Main.storyboard */,
 				481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */,
+				48C96EDE1B6D657000B860B4 /* AutoMonsterIcon@2x.png */,
 				48A5FC3F1B645B8F009D0893 /* Extensions.swift */,
 				489477A51B619A7800FBFB67 /* Configuration.swift */,
 				48A5FC411B646297009D0893 /* Constants.swift */,
@@ -466,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				481913261B5DBFDD00C8DB14 /* Main.storyboard in Resources */,
+				48C96EDF1B6D657000B860B4 /* AutoMonsterIcon@2x.png in Resources */,
 				4819132B1B5DBFDD00C8DB14 /* LaunchScreen.xib in Resources */,
 				481913281B5DBFDD00C8DB14 /* Images.xcassets in Resources */,
 			);

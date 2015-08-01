@@ -168,6 +168,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Automatic"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="AutoMonsterIcon.png"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="onActionMessage" value="Turn automatic mode ON"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="offActionMessage" value="Turn automatic mode OFF"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="toggleAutoMode:" destination="VbQ-T5-QjR" eventType="valueChanged" id="oAO-d5-yuR"/>
@@ -184,4 +187,7 @@
             <point key="canvasLocation" x="336" y="992"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AutoMonsterIcon.png" width="50" height="50"/>
+    </resources>
 </document>
