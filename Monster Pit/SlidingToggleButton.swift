@@ -54,7 +54,7 @@ class SlidingToggleButton: UIControl {
             if origin.x >= bounds.maxX - hiddenSpacing {
                 on = !on
                 gestureRecognizer.enabled = false
-            } else {
+            } else if gestureRecognizer.velocityInView(innerView!).x > 0 {
                 innerView?.frame = CGRect(origin: origin, size: innerView!.frame.size)
                 self.actionLabel?.alpha = (hiddenSpacing + origin.x) / hiddenSpacing
             }
