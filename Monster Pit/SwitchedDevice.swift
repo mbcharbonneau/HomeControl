@@ -71,18 +71,19 @@ class SwitchedDevice: PFObject, PFSubclassing {
                 self.saveInBackgroundWithBlock() { (success: Bool, parseError: NSError?) -> Void in
                     if parseError != nil {
                         println("Parse save error: \(parseError)")
+                    } else {
+                        println("Success! \(self.name) is now \(command.lowercaseString).")
                     }
-                    completionBlock( error )
-                    println("Success! \(self.name) is now \(command.lowercaseString).")
                     UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
                     self.backgroundTask = nil
+                    completionBlock( error )
                 }
 
             } else {
                 println("Command finished with error: \(error)")
-                completionBlock( error )
                 UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
                 self.backgroundTask = nil
+                completionBlock( error )
             }
         }
         

@@ -255,7 +255,12 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func dataController(controller: DataController, toggledDevice: SwitchedDevice) {
-        collectionView?.reloadSections(NSIndexSet(index: 1))
+        
+        if let index = find( dataController.devices, toggledDevice ) {
+            
+            let path = NSIndexPath(forItem: index, inSection: 1)
+            collectionView?.reloadItemsAtIndexPaths([path])
+        }
 
         // If there are multiple notifications, group them into one (also it
         // takes several seconds for the switches to receive the command so 
