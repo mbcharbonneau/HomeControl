@@ -34,32 +34,61 @@ class SwitchedDevice: PFObject, PFSubclassing {
     }
     
     var isBusy: Bool {
-        get { return commandTask != nil && commandTask?.state != NSURLSessionTaskState.Completed }
+        get { return backgroundTask != nil }
     }
 
     func turnOn( finished: ( NSError? ) -> Void ) {
-        sendCommand( "On", callback: { ( error: NSError? ) -> Void in
-            if ( error == nil ) {
-                self.on = true
-                self.saveInBackgroundWithBlock( nil )
-            }
-            finished( error )
-        })
+        switchDevice(true, completionBlock: finished)
     }
 
     func turnOff( finished: ( NSError? ) -> Void ) {
-        sendCommand( "Off", callback: { ( error: NSError? ) -> Void in
-            if ( error == nil ) {
-                self.on = false
-                self.saveInBackgroundWithBlock( nil )
-            }
-            finished( error )
-        })
+        switchDevice(false, completionBlock: finished)
     }
 
     // MARK: SwitchedDevice Private
     
     private var commandTask: NSURLSessionTask?
+    private var backgroundTask: UIBackgroundTaskIdentifier?
+    
+    private func switchDevice( turnOn: Bool, completionBlock: ( NSError? ) -> Void ) {
+        
+        if backgroundTask != nil {
+            println("\(name) was sent a command before the previous command finished!")
+            return
+        }
+        
+        backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
+            println("\(self.name) background task expired!")
+            UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
+            self.backgroundTask = nil
+        }
+        
+        let command = turnOn ? "On" : "Off"
+        let callback = { ( error: NSError? ) -> Void in
+            
+            if error == nil {
+                self.on = turnOn
+                self.saveInBackgroundWithBlock() { (success: Bool, parseError: NSError?) -> Void in
+                    if parseError != nil {
+                        println("Parse save error: \(parseError)")
+                    }
+                    completionBlock( error )
+                    println("Success! \(self.name) is now \(command.lowercaseString).")
+                    UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
+                    self.backgroundTask = nil
+                }
+
+            } else {
+                println("Command finished with error: \(error)")
+                completionBlock( error )
+                UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
+                self.backgroundTask = nil
+            }
+        }
+        
+        println("Turning \(self.name) \(command.lowercaseString)...")
+        sendCommand(command, callback: callback)
+    }
     
     private func makeURLForCommand( command: String ) -> String {
         let eventName = name.stringByReplacingOccurrencesOfString(" ", withString: "") + command
