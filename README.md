@@ -3,6 +3,8 @@ Welcome to the Monster Pit!
 
 Monster Pit is home automation app for iOS, built in Swift. You probably won't have much luck simply forking this project for your own use. There's a lot going on, and it's all built for my own custom hardware and room layout!
 
+![Screenshot](http://mbcharbonneau.com/files/MonsterPit.png)
+
 I'm working on documenting this project in a series of blog posts, and this repo will be provided as a jumping off point for anyone interested in starting their own app. In the meantime, you can contact me [@mbcharbonneau](https://twitter.com/mbcharbonneau) on Twitter.
 
 ## Services
