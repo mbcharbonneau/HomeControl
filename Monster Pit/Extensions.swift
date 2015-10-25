@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-extension CLRegionState: Printable {
+extension CLRegionState: CustomStringConvertible {
     public var description: String {
         switch self {
         case Unknown:

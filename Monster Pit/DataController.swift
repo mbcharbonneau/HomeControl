@@ -50,7 +50,7 @@ class DataController: NSObject {
     
     func refresh() {
 
-        if isEmpty(sensors) || isEmpty(devices) {
+        if sensors.isEmpty || devices.isEmpty {
             reloadAllData()
         } else {
             refreshExistingObjects()
@@ -59,10 +59,10 @@ class DataController: NSObject {
     
     func evaluateDeciders(notification: NSNotification) {
                 
-        println("Checking deciders...")
+        print("Checking deciders...")
         
         if devices.filter( { $0.isBusy } ).count > 0 {
-            println("One or more devices are busy, postponing evaluation!")
+            print("One or more devices are busy, postponing evaluation!")
             let time = dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC)))
             dispatch_after(time, dispatch_get_main_queue()) { [weak self] in
                 self?.evaluateDeciders(notification)
@@ -71,7 +71,7 @@ class DataController: NSObject {
         }
         
         if !deviceUpdateLock.tryLock() {
-            println("Can't evaluate devices during an update!")
+            print("Can't evaluate devices during an update!")
             return
         }
         
@@ -85,7 +85,7 @@ class DataController: NSObject {
             
             for decider in device.deciders {
                 
-                println( "\t\(decider.name) wants \(device.name) to be \(decider.state)." );
+                print( "\t\(decider.name) wants \(device.name) to be \(decider.state)." );
                 
                 if ( decider.state == State.Unknown ) {
                     continue outerLoop
@@ -113,7 +113,7 @@ class DataController: NSObject {
         
         deviceUpdateLock.unlock()
         
-        println("Done!")
+        print("Done!")
     }
     
     // MARK: DataController Private
@@ -131,14 +131,21 @@ class DataController: NSObject {
             sensorQuery.orderByAscending( "createdAt" )
             deviceQuery.orderByAscending( "createdAt" )
             
-            let sensorResults = sensorQuery.findObjects()
-            let deviceResults = deviceQuery.findObjects()
+            var sensors: [RoomSensor]?
+            var devices: [SwitchedDevice]?
             
-            println("Reloaded all data sources.")
+            do {
+                sensors = try sensorQuery.findObjects() as? [RoomSensor]
+                devices = try deviceQuery.findObjects() as? [SwitchedDevice]
+            } catch {
+                print("Parse fetch error: \(error)")
+            }
+            
+            print("Reloaded all data sources.")
             
             dispatch_async( dispatch_get_main_queue() ) {
                 
-                if let sensors = sensorResults as? [RoomSensor], devices = deviceResults as? [SwitchedDevice] {
+                if let sensors = sensors, devices = devices {
                     
                     for device in devices {
                         device.deciders = self.decidersForDevice( device )
@@ -160,11 +167,15 @@ class DataController: NSObject {
         dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ) ) {
             
             self.deviceUpdateLock.lock()
-            SwitchedDevice.fetchAll(self.devices)
-            RoomSensor.fetchAll(self.sensors)
+            do {
+                try SwitchedDevice.fetchAll(self.devices)
+                try RoomSensor.fetchAll(self.sensors)
+            } catch {
+                print("Parse fetch error: \(error)")
+            }
             self.deviceUpdateLock.unlock()
             
-            println("Refreshed existing objects.")
+            print("Refreshed existing objects.")
             
             dispatch_async( dispatch_get_main_queue() ) {
 
@@ -189,12 +200,12 @@ class DataController: NSObject {
         var array = [DecisionMakerProtocol]()
         let types = device.deciderClasses
         
-        if contains( types, "BeaconDecider" ) {
+        if types.contains("BeaconDecider") {
             let beacon = BeaconDecider( locationController: locationController )
             array.append( beacon )
         }
         
-        if contains( types, "GeofenceDecider" ) {
+        if types.contains("GeofenceDecider") {
             let geofence = GeofenceDecider( locationController: locationController )
             array.append( geofence )
         }

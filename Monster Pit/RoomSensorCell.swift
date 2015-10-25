@@ -18,7 +18,7 @@ class RoomSensorCell: UICollectionViewCell {
     
     private var lastUpdate: NSDate?
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
         
         backgroundColor = UIColor(red: 231.0/255.0, green: 55.0/255.0, blue: 74.0/255.0, alpha: 1.0)
@@ -61,10 +61,10 @@ class RoomSensorCell: UICollectionViewCell {
         formatter.includesApproximationPhrase = false
         formatter.collapsesLargestUnit = false
         formatter.maximumUnitCount = 1
-        formatter.allowedUnits = NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitMinute | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitDay
+        formatter.allowedUnits = [.Hour, .Minute, .Second, .Day]
         
         if let date = lastUpdate {
-            let string = formatter.stringFromDate( date, toDate:NSDate.new() )!
+            let string = formatter.stringFromDate( date, toDate:NSDate() )!
             lastUpdatedLabel?.text = "Updated \(string) ago"
         } else {
             lastUpdatedLabel?.text = ""

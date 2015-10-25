@@ -15,7 +15,7 @@ class DeviceCell: UICollectionViewCell {
     @IBOutlet weak private var deciderLabel: UILabel?
     @IBOutlet weak private var deviceSwitch: UISwitch?
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
         
         backgroundColor = UIColor.whiteColor()

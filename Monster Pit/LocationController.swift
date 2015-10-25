@@ -26,7 +26,7 @@ class LocationController: NSObject, CLLocationManagerDelegate {
     
     override init() {
 
-        let beaconUUID = NSUUID(UUIDString: Configuration.MonsterPit.BeaconUUID)
+        let beaconUUID = NSUUID(UUIDString: Configuration.MonsterPit.BeaconUUID)!
         let location = Configuration.MonsterPit.Location
         let radius = 50.0
         
@@ -51,27 +51,27 @@ class LocationController: NSObject, CLLocationManagerDelegate {
     
     // MARK: CLLocationManagerDelegate
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         locationManager.startRangingBeaconsInRegion( beaconRegion )
         locationManager.startMonitoringForRegion( beaconRegion )
         locationManager.startMonitoringForRegion( geofenceRegion )
         locationManager.requestStateForRegion( geofenceRegion )
     }
     
-    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
+    func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
         switch region.identifier {
         case beaconRegion.identifier:
             beaconState = state
-            println( "iBeacon region changed: \(state)" )
+            print( "iBeacon region changed: \(state)" )
         case geofenceRegion.identifier:
             geofenceState = state
-            println( "Geofence region changed: \(state)" )
+            print( "Geofence region changed: \(state)" )
         default: ()
         }
         NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
     }
     
-    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
+    func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
         // Only called in foreground mode.
         return
     }

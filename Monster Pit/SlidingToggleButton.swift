@@ -41,7 +41,7 @@ class SlidingToggleButton: UIControl {
         
         switch gestureRecognizer.state {
         case .Cancelled, .Ended:
-            UIView.animateWithDuration( 0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: UIViewAnimationOptions(0), animations: { () -> Void in
+            UIView.animateWithDuration( 0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
                 self.innerView?.frame = CGRect(origin: self.innerViewOrigin, size: self.innerView!.frame.size)
                 self.actionLabel?.alpha = 0.0
                 }, completion: { (finished: Bool) -> Void in
@@ -81,21 +81,21 @@ class SlidingToggleButton: UIControl {
         
         titleLabel = UILabel()
         titleLabel?.text = title
-        titleLabel?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        titleLabel?.translatesAutoresizingMaskIntoConstraints = false
         titleLabel?.font = UIFont.systemFontOfSize(16.0)
         titleLabel?.textColor = tintColor
         titleLabel?.textAlignment = NSTextAlignment.Left
         
         imageView = UIImageView()
-        imageView?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        imageView?.translatesAutoresizingMaskIntoConstraints = false
         
         leftView = UIView()
-        leftView?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        leftView?.translatesAutoresizingMaskIntoConstraints = false
         leftView?.backgroundColor = tintColor
         leftView?.layer.cornerRadius = leftViewWidth / 2.0
         
         actionLabel = UILabel()
-        actionLabel?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        actionLabel?.translatesAutoresizingMaskIntoConstraints = false
         actionLabel?.numberOfLines = 2
         actionLabel?.font = UIFont.systemFontOfSize(12.0)
         actionLabel?.textColor = UIColor.darkGrayColor()
@@ -114,11 +114,11 @@ class SlidingToggleButton: UIControl {
         let metrics: [String: CGFloat] = ["imageSize": bounds.height, "leftViewWidth": leftViewWidth, "space": elementSpacing, "hidden": hiddenSpacing]
         let views: [String: UIView] = ["titleLabel": titleLabel!, "imageView": imageView!, "leftView": leftView!, "actionLabel": actionLabel!]
         
-        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[actionLabel(hidden)]-(space)-[leftView(leftViewWidth)]-(space)-[imageView(imageSize)]-(space)-[titleLabel]|", options: NSLayoutFormatOptions(0), metrics: metrics, views: views))
-        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[titleLabel]|", options: NSLayoutFormatOptions(0), metrics: metrics, views: views))
-        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[imageView(imageSize)]|", options: NSLayoutFormatOptions(0), metrics: metrics, views: views))
-        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[leftView]|", options: NSLayoutFormatOptions(0), metrics: metrics, views: views))
-        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[actionLabel]|", options: NSLayoutFormatOptions(0), metrics: metrics, views: views))
+        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[actionLabel(hidden)]-(space)-[leftView(leftViewWidth)]-(space)-[imageView(imageSize)]-(space)-[titleLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
+        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[titleLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
+        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[imageView(imageSize)]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
+        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[leftView]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
+        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[actionLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
 
         backgroundColor = UIColor.clearColor()
         addSubview(innerView!)
@@ -131,7 +131,7 @@ class SlidingToggleButton: UIControl {
         configure()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configure()
     }

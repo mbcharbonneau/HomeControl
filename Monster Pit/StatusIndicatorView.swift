@@ -14,8 +14,8 @@ class StatusIndicatorView: UIView {
         super.init(frame: frame)
         self.backgroundColor = UIColor.lightGrayColor();
     }
-    
-    required init(coder aDecoder: NSCoder) {
+        
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.backgroundColor = UIColor.lightGrayColor();
     }

@@ -53,12 +53,12 @@ class SwitchedDevice: PFObject, PFSubclassing {
     private func switchDevice( turnOn: Bool, completionBlock: ( NSError? ) -> Void ) {
         
         if backgroundTask != nil {
-            println("\(name) was sent a command before the previous command finished!")
+            print("\(name) was sent a command before the previous command finished!")
             return
         }
         
         backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
-            println("\(self.name) background task expired!")
+            print("\(self.name) background task expired!")
             UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
             self.backgroundTask = nil
         }
@@ -70,9 +70,9 @@ class SwitchedDevice: PFObject, PFSubclassing {
                 self.on = turnOn
                 self.saveInBackgroundWithBlock() { (success: Bool, parseError: NSError?) -> Void in
                     if parseError != nil {
-                        println("Parse save error: \(parseError)")
+                        print("Parse save error: \(parseError)")
                     } else {
-                        println("Success! \(self.name) is now \(command.lowercaseString).")
+                        print("Success! \(self.name) is now \(command.lowercaseString).")
                     }
                     UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
                     self.backgroundTask = nil
@@ -80,14 +80,14 @@ class SwitchedDevice: PFObject, PFSubclassing {
                 }
 
             } else {
-                println("Command finished with error: \(error)")
+                print("Command finished with error: \(error)")
                 UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
                 self.backgroundTask = nil
                 completionBlock( error )
             }
         }
         
-        println("Turning \(self.name) \(command.lowercaseString)...")
+        print("Turning \(self.name) \(command.lowercaseString)...")
         sendCommand(command, callback: callback)
     }
     
@@ -109,9 +109,9 @@ class SwitchedDevice: PFObject, PFSubclassing {
             commandTask = session.dataTaskWithRequest( request, completionHandler: { ( data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                 dispatch_async( dispatch_get_main_queue(), { () -> Void in
                     if let error = error {
-                        println("HTTP error: \(error)")
+                        print("HTTP error: \(error)")
                     } else {
-                        println("Finished request: \(response?.URL as NSURL!)")
+                        print("Finished request: \(response?.URL as NSURL!)")
                     }
                     callback( error )
                     self.commandTask = nil

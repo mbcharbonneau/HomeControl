@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SwitchedDevice.registerSubclass()
 
         Parse.setApplicationId( Configuration.Parse.AppID, clientKey:Configuration.Parse.ClientKey )
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Alert | .Sound, categories: nil))
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Badge, .Alert, .Sound], categories: nil))
         
         return true
     }

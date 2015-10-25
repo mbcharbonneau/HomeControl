@@ -57,7 +57,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         if let collectionView = collectionView {
             
-            for cell in collectionView.visibleCells() as! [UICollectionViewCell] {
+            for cell in collectionView.visibleCells() {
                 
                 if let cell = cell as? RoomSensorCell {
                     cell.updateTimeLabel()
@@ -73,9 +73,9 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
                 formatter.includesApproximationPhrase = false
                 formatter.collapsesLargestUnit = false
                 formatter.maximumUnitCount = 1
-                formatter.allowedUnits = NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitMinute | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitDay
+                formatter.allowedUnits = [.Hour, .Minute, .Second, .Day]
                 
-                let time = formatter.stringFromDate( date, toDate:NSDate.new() )!
+                let time = formatter.stringFromDate( date, toDate:NSDate() )!
                 label.text = "Last updated \(time) ago."
             }
         }
@@ -198,7 +198,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         switch kind {
         case UICollectionElementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryViewOfKind( kind, withReuseIdentifier: footerIdentifier, forIndexPath: indexPath ) as! UICollectionReusableView
+            let footer = collectionView.dequeueReusableSupplementaryViewOfKind( kind, withReuseIdentifier: footerIdentifier, forIndexPath: indexPath )
             if let label = footer.viewWithTag( 100 ) as? UILabel {
                 updateLabel = label
             }
@@ -256,8 +256,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     func dataController(controller: DataController, toggledDevice: SwitchedDevice) {
         
-        if let index = find( dataController.devices, toggledDevice ) {
-            
+        if let index = dataController.devices.indexOf(toggledDevice) {
             let path = NSIndexPath(forItem: index, inSection: 1)
             collectionView?.reloadItemsAtIndexPaths([path])
         }

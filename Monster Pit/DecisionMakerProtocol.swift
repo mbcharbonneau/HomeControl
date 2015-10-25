@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum State: Printable {
+enum State: CustomStringConvertible {
     case On
     case Off
     case Unknown
