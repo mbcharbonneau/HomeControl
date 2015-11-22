@@ -27,7 +27,7 @@ class DeviceCell: UICollectionViewCell {
         self.device = device
         nameLabel?.text = device.name
         deviceSwitch?.setOn( device.on, animated: true )
-        deviceSwitch?.enabled = !device.isBusy && device.online
+        deviceSwitch?.enabled = device.online
         updateDecidersLabel()
     }
     

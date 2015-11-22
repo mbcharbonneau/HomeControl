@@ -47,6 +47,7 @@
 		48A5FC421B646297009D0893 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC411B646297009D0893 /* Constants.swift */; };
 		48A5FC441B6578A9009D0893 /* SlidingToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5FC431B6578A9009D0893 /* SlidingToggleButton.swift */; };
 		48C96EDF1B6D657000B860B4 /* AutoMonsterIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C96EDE1B6D657000B860B4 /* AutoMonsterIcon@2x.png */; };
+		48DA0DF91C01250D00FD7207 /* DeviceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DA0DF81C01250D00FD7207 /* DeviceOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		48A5FC411B646297009D0893 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		48A5FC431B6578A9009D0893 /* SlidingToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingToggleButton.swift; sourceTree = "<group>"; };
 		48C96EDE1B6D657000B860B4 /* AutoMonsterIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AutoMonsterIcon@2x.png"; sourceTree = "<group>"; };
+		48DA0DF81C01250D00FD7207 /* DeviceOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 			children = (
 				486B0B0D1B5DE6E600943145 /* RoomSensor.swift */,
 				4817BAE61B6298D20092E6C8 /* SwitchedDevice.swift */,
+				48DA0DF81C01250D00FD7207 /* DeviceOperation.swift */,
 				48A5FC311B642489009D0893 /* DecisionMakerProtocol.swift */,
 				48A5FC351B642863009D0893 /* GeofenceDecider.swift */,
 				48A5FC371B6428C0009D0893 /* BeaconDecider.swift */,
@@ -526,6 +529,7 @@
 				48A5FC361B642863009D0893 /* GeofenceDecider.swift in Sources */,
 				481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */,
 				48A5FC401B645B8F009D0893 /* Extensions.swift in Sources */,
+				48DA0DF91C01250D00FD7207 /* DeviceOperation.swift in Sources */,
 				486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */,
 				48A5FC421B646297009D0893 /* Constants.swift in Sources */,
 			);
@@ -632,7 +636,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -670,7 +674,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

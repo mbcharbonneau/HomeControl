@@ -33,93 +33,11 @@ class SwitchedDevice: PFObject, PFSubclassing {
         set { self["online"] = newValue }
     }
     
-    var isBusy: Bool {
-        get { return backgroundTask != nil }
-    }
-
-    func turnOn( finished: ( NSError? ) -> Void ) {
-        switchDevice(true, completionBlock: finished)
-    }
-
-    func turnOff( finished: ( NSError? ) -> Void ) {
-        switchDevice(false, completionBlock: finished)
-    }
-
-    // MARK: SwitchedDevice Private
+    // MARK: NSObject
     
-    private var commandTask: NSURLSessionTask?
-    private var backgroundTask: UIBackgroundTaskIdentifier?
-    
-    private func switchDevice( turnOn: Bool, completionBlock: ( NSError? ) -> Void ) {
-        
-        if backgroundTask != nil {
-            print("\(name) was sent a command before the previous command finished!")
-            return
-        }
-        
-        backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
-            print("\(self.name) background task expired!")
-            UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
-            self.backgroundTask = nil
-        }
-        
-        let command = turnOn ? "On" : "Off"
-        let callback = { ( error: NSError? ) -> Void in
-            
-            if error == nil {
-                self.on = turnOn
-                self.saveInBackgroundWithBlock() { (success: Bool, parseError: NSError?) -> Void in
-                    if parseError != nil {
-                        print("Parse save error: \(parseError)")
-                    } else {
-                        print("Success! \(self.name) is now \(command.lowercaseString).")
-                    }
-                    UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
-                    self.backgroundTask = nil
-                    completionBlock( error )
-                }
-
-            } else {
-                print("Command finished with error: \(error)")
-                UIApplication.sharedApplication().endBackgroundTask(self.backgroundTask!)
-                self.backgroundTask = nil
-                completionBlock( error )
-            }
-        }
-        
-        print("Turning \(self.name) \(command.lowercaseString)...")
-        sendCommand(command, callback: callback)
-    }
-    
-    private func makeURLForCommand( command: String ) -> String {
-        let eventName = name.stringByReplacingOccurrencesOfString(" ", withString: "") + command
-        return "https://maker.ifttt.com/trigger/\(eventName)/with/key/\(Configuration.IFTTT.ClientKey)"
-    }
-
-    private func sendCommand( command: String, callback: ( NSError? ) -> Void ) {
-
-        if let URL = NSURL( string: makeURLForCommand( command ) ) {
-
-            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-            let session = NSURLSession(configuration: config)
-            let request = NSMutableURLRequest(URL: URL)
-
-            request.HTTPMethod = "POST"
-
-            commandTask = session.dataTaskWithRequest( request, completionHandler: { ( data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-                dispatch_async( dispatch_get_main_queue(), { () -> Void in
-                    if let error = error {
-                        print("HTTP error: \(error)")
-                    } else {
-                        print("Finished request: \(response?.URL as NSURL!)")
-                    }
-                    callback( error )
-                    self.commandTask = nil
-                })
-            })
-            
-            commandTask?.resume()
-        }
+    override func isEqual(object: AnyObject?) -> Bool {
+        guard let other = object as? SwitchedDevice else { return false }
+        return other.name == name
     }
     
     // MARK: PFSubclassing
@@ -127,4 +45,8 @@ class SwitchedDevice: PFObject, PFSubclassing {
     class func parseClassName() -> String {
         return "Device"
     }
+}
+
+func ==(lhs: SwitchedDevice, rhs: SwitchedDevice) -> Bool {
+    return lhs.isEqual(rhs)
 }

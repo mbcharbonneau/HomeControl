@@ -10,8 +10,9 @@ import Foundation
 import Parse
 
 protocol DataControllerDelegate: class {
-    func dataControllerRefreshed(controller: DataController)
-    func dataController(controller: DataController, toggledDevice: SwitchedDevice )
+    func dataControllerReloadedData(controller: DataController)
+    func dataControllerRefreshedSensors(controller: DataController)
+    func dataController(controller: DataController, toggledDevice: SwitchedDevice)
 }
 
 class DataController: NSObject {
@@ -40,6 +41,7 @@ class DataController: NSObject {
 
     override init() {
         self.enableAutoMode = NSUserDefaults.standardUserDefaults().boolForKey(Constants.EnableAutoModeDefaultsKey)
+        self.operationQueue.maxConcurrentOperationCount = 1
         super.init()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("evaluateDeciders:"), name: Constants.ForceEvaluationNotification, object: nil)
     }
@@ -51,17 +53,33 @@ class DataController: NSObject {
     func refresh() {
 
         if sensors.isEmpty || devices.isEmpty {
-            reloadAllData()
+            reloadData()
         } else {
-            refreshExistingObjects()
+            refreshSensors()
         }
+    }
+    
+    func switchDevice(device: SwitchedDevice, turnOn: Bool) {
+        
+        let command = turnOn ? DeviceCommand.TurnOn : DeviceCommand.TurnOff
+        let operation = DeviceOperation(device, command: command)
+        let task = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler() { operation.cancel() }
+        
+        operation.completionBlock = {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.delegate?.dataController(self, toggledDevice: device)
+                UIApplication.sharedApplication().endBackgroundTask(task)
+            }
+        }
+        
+        operationQueue.addOperation(operation)
     }
     
     func evaluateDeciders(notification: NSNotification) {
                 
         print("Checking deciders...")
         
-        if devices.filter( { $0.isBusy } ).count > 0 {
+        guard operationQueue.operationCount == 0 else {
             print("One or more devices are busy, postponing evaluation!")
             let time = dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC)))
             dispatch_after(time, dispatch_get_main_queue()) { [weak self] in
@@ -69,12 +87,7 @@ class DataController: NSObject {
             }
             return
         }
-        
-        if !deviceUpdateLock.tryLock() {
-            print("Can't evaluate devices during an update!")
-            return
-        }
-        
+                
         outerLoop: for device in devices {
 
             if device.deciders.count == 0 || !device.online {
@@ -94,34 +107,23 @@ class DataController: NSObject {
                 let decision = decider.state == State.On;
                 turnOn = turnOn && decision;
             }
-            
-            let completionBlock = { ( error: NSError? ) -> Void in
-                if ( error == nil ) {
-                    self.delegate?.dataController( self, toggledDevice: device )
-                }
-                self.deviceUpdateLock.unlock()
-            }
-            
+
             if turnOn && !device.on {
-                self.deviceUpdateLock.lock()
-                device.turnOn( completionBlock )
+                switchDevice(device, turnOn: true)
             } else if !turnOn && device.on {
-                self.deviceUpdateLock.lock()
-                device.turnOff( completionBlock )
+                switchDevice(device, turnOn: false)
             }
         }
-        
-        deviceUpdateLock.unlock()
-        
+                
         print("Done!")
     }
     
     // MARK: DataController Private
     
     private let locationController = LocationController()
-    private let deviceUpdateLock = NSRecursiveLock()
+    private let operationQueue = NSOperationQueue()
     
-    private func reloadAllData() {
+    private func reloadData() {
         
         dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ) ) {
             
@@ -154,7 +156,7 @@ class DataController: NSObject {
                     self.sensors = sensors
                     self.devices = devices
                     self.lastUpdate = NSDate()
-                    self.delegate?.dataControllerRefreshed(self)
+                    self.delegate?.dataControllerReloadedData(self)
                     
                     NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
                 }
@@ -162,29 +164,22 @@ class DataController: NSObject {
         }
     }
     
-    private func refreshExistingObjects() {
+    private func refreshSensors() {
 
         dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ) ) {
             
-            self.deviceUpdateLock.lock()
             do {
-                try SwitchedDevice.fetchAll(self.devices)
                 try RoomSensor.fetchAll(self.sensors)
             } catch {
                 print("Parse fetch error: \(error)")
             }
-            self.deviceUpdateLock.unlock()
             
-            print("Refreshed existing objects.")
+            print("Refreshed sensors.")
             
             dispatch_async( dispatch_get_main_queue() ) {
 
-                for device in self.devices {
-                    device.deciders = self.decidersForDevice( device )
-                }
-
                 self.lastUpdate = NSDate()
-                self.delegate?.dataControllerRefreshed(self)
+                self.delegate?.dataControllerRefreshedSensors(self)
 
                 NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
             }
@@ -193,9 +188,7 @@ class DataController: NSObject {
     
     private func decidersForDevice( device:SwitchedDevice ) -> [DecisionMakerProtocol] {
         
-        if !enableAutoMode || !device.online {
-            return []
-        }
+        guard enableAutoMode && device.online else { return [] }
         
         var array = [DecisionMakerProtocol]()
         let types = device.deciderClasses

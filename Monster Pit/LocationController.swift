@@ -6,21 +6,91 @@
 //  Copyright (c) 2015 Downtown Software House. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 class LocationController: NSObject, CLLocationManagerDelegate {
     
     // MARK: LocationController
     
-    var beaconState = CLRegionState.Unknown
-    var geofenceState = CLRegionState.Unknown
+    var beaconState = CLRegionState.Unknown {
+        didSet {
+            print( "iBeacon state change: \(beaconState)" )
+            NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
+        }
+    }
     
+    var geofenceState = CLRegionState.Unknown {
+        didSet {
+            print( "Geofence state change: \(geofenceState)" )
+            NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
+        }
+    }
+    
+    var isChanging: Bool {
+        get { return beaconDebounceTimer != nil || geofenceDebounceTimer != nil }
+    }
+
     // MARK: LocationController Private
     
     private let locationManager: CLLocationManager
     private let beaconRegion: CLBeaconRegion
     private let geofenceRegion: CLCircularRegion
+    private var beaconDebounceTimer: NSTimer?
+    private var changeBeaconStateTask: UIBackgroundTaskIdentifier?
+    private var geofenceDebounceTimer: NSTimer?
+    private var changeGeofenceTask: UIBackgroundTaskIdentifier?
+    
+    private var nextBeaconState = CLRegionState.Unknown {
+        didSet {
+            if beaconState == .Unknown {
+                beaconState = nextBeaconState
+            } else {
+                beaconDebounceTimer?.invalidate()
+                beaconDebounceTimer = NSTimer(timeInterval: 20.0, target: self, selector: "endDebounceTimer:", userInfo: nil, repeats: false)
+                NSRunLoop.currentRunLoop().addTimer(beaconDebounceTimer!, forMode: NSRunLoopCommonModes)
+                if changeBeaconStateTask == nil {
+                    changeBeaconStateTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler() {
+                        self.beaconDebounceTimer?.fire()
+                    }
+                }
+                print( "Debouncing iBeacon state change: \(nextBeaconState)" )
+            }
+        }
+    }
+    
+    private var nextGeofenceState = CLRegionState.Unknown {
+        didSet {
+            if geofenceState == .Unknown {
+                geofenceState = nextGeofenceState
+            } else {
+                geofenceDebounceTimer?.invalidate()
+                geofenceDebounceTimer = NSTimer(timeInterval: 20.0, target: self, selector: "endDebounceTimer:", userInfo: nil, repeats: false)
+                NSRunLoop.currentRunLoop().addTimer(geofenceDebounceTimer!, forMode: NSRunLoopCommonModes)
+                if changeGeofenceTask == nil {
+                    changeGeofenceTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler() {
+                        self.geofenceDebounceTimer?.fire()
+                    }
+                }
+                print( "Debouncing Geofence state change: \(nextGeofenceState)" )
+            }
+        }
+    }
+    
+    @objc private func endDebounceTimer(timer: NSTimer) {
+        
+        if timer == beaconDebounceTimer {
+            beaconDebounceTimer = nil
+            beaconState = nextBeaconState
+            if let task = self.changeBeaconStateTask { UIApplication.sharedApplication().endBackgroundTask(task) }
+            self.changeBeaconStateTask = nil
+        } else if timer == geofenceDebounceTimer {
+            geofenceDebounceTimer = nil
+            geofenceState = nextGeofenceState
+            if let task = self.changeGeofenceTask { UIApplication.sharedApplication().endBackgroundTask(task) }
+            self.changeBeaconStateTask = nil
+        }
+    }
     
     // MARK: NSObject
     
@@ -61,14 +131,11 @@ class LocationController: NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
         switch region.identifier {
         case beaconRegion.identifier:
-            beaconState = state
-            print( "iBeacon region changed: \(state)" )
+            nextBeaconState = state
         case geofenceRegion.identifier:
-            geofenceState = state
-            print( "Geofence region changed: \(state)" )
+            nextGeofenceState = state
         default: ()
         }
-        NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
     }
     
     func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {

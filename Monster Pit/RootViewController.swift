@@ -12,7 +12,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     // MARK: RootViewController
     
-    @IBAction func toggleDeviceOnOff( sender: UISwitch ) {
+    @IBAction func toggleDeviceOnOff(sender: UISwitch) {
         
         let device = dataController.devices[sender.tag]
 
@@ -24,19 +24,10 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
             toggleAutoButton?.on = dataController.enableAutoMode
         }
         
-        let path = NSIndexPath(forItem: sender.tag, inSection: 1)
-        let block = { ( error: NSError? ) -> Void in
-            if error != nil {
-                self.collectionView?.reloadItemsAtIndexPaths([path])
-            } else {
-                sender.enabled = true
-            }
-        }
-        
         if sender.on {
-            device.turnOn( block )
+            dataController.switchDevice(device, turnOn: true)
         } else {
-            device.turnOff( block )
+            dataController.switchDevice(device, turnOn: false)
         }
 
         // Disable the UISwitch until the web request completes.
@@ -44,16 +35,16 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         sender.enabled = false
     }
     
-    @IBAction func toggleAutoMode( sender: SlidingToggleButton ) {
+    @IBAction func toggleAutoMode(sender: SlidingToggleButton) {
         dataController.enableAutoMode = sender.on
     }
     
-    func refreshDataSource( timer: NSTimer ) {
+    func refreshDataSource(timer: NSTimer) {
         
         dataController.refresh()
     }
     
-    func refreshCellLabels( timer: NSTimer ) {
+    func refreshCellLabels(timer: NSTimer) {
         
         if let collectionView = collectionView {
             
@@ -81,7 +72,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
-    func scheduleNotifications( timer: NSTimer ) {
+    func scheduleNotifications(timer: NSTimer) {
         
         let notification = UILocalNotification()
         
@@ -109,7 +100,12 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         
         UIApplication.sharedApplication().scheduleLocalNotification( notification )
+
+        if let task = self.notificationTask {
+            UIApplication.sharedApplication().endBackgroundTask(task)
+        }
         
+        notificationTask = nil
         notificationCoalescingTimer = nil
         notificationDevices.removeAll(keepCapacity: false)
     }
@@ -124,6 +120,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     private var updateDataTimer: NSTimer?
     private var notificationCoalescingTimer: NSTimer?
     private var notificationDevices = [SwitchedDevice]()
+    private var notificationTask: UIBackgroundTaskIdentifier?
     private weak var updateLabel: UILabel?
     
     @IBOutlet private weak var toggleAutoButton: SlidingToggleButton? {
@@ -250,8 +247,12 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     // MARK: DataControllerDelegate
     
-    func dataControllerRefreshed(controller: DataController) {
+    func dataControllerReloadedData(controller: DataController) {
         collectionView?.reloadData()
+    }
+
+    func dataControllerRefreshedSensors(controller: DataController) {
+        collectionView?.reloadSections(NSIndexSet(index: 0))
     }
     
     func dataController(controller: DataController, toggledDevice: SwitchedDevice) {
@@ -265,11 +266,12 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         // takes several seconds for the switches to receive the command so 
         // there's no sense in showing a notification immediately).
 
-        if let timer = notificationCoalescingTimer {
-            timer.invalidate()
-        }
-        
+        notificationCoalescingTimer?.invalidate()
         notificationDevices.append(toggledDevice)
-        notificationCoalescingTimer = NSTimer.scheduledTimerWithTimeInterval( 5.0, target: self, selector: Selector("scheduleNotifications:"), userInfo: nil, repeats: false)
+        notificationCoalescingTimer = NSTimer(timeInterval: 5.0, target: self, selector: Selector("scheduleNotifications:"), userInfo: nil, repeats: false)
+        NSRunLoop.currentRunLoop().addTimer(notificationCoalescingTimer!, forMode: NSRunLoopCommonModes)
+        notificationTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler() {
+            self.notificationCoalescingTimer?.fire()
+        }
     }
 }
