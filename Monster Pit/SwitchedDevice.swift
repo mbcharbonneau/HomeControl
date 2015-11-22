@@ -33,6 +33,11 @@ class SwitchedDevice: PFObject, PFSubclassing {
         set { self["online"] = newValue }
     }
     
+    var sensor: RoomSensor? {
+        get { return self["sensor"] as? RoomSensor }
+        set { self["sensor"] = newValue }
+    }
+    
     // MARK: NSObject
     
     override func isEqual(object: AnyObject?) -> Bool {

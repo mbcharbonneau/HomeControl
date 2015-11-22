@@ -18,11 +18,8 @@ class SensorDecider: DecisionMakerProtocol {
     
     var state: State {
         get {
-            if let light = sensor.light {
-                return light > 10.0 ? State.Off : State.On
-            } else {
-                return State.Unknown
-            }
+            guard let light = sensor.light else { return State.Unknown }
+            return light > 10.0 ? State.Off : State.On
         }
     }
     

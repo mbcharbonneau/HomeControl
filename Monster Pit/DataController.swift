@@ -133,6 +133,8 @@ class DataController: NSObject {
             sensorQuery.orderByAscending( "createdAt" )
             deviceQuery.orderByAscending( "createdAt" )
             
+            deviceQuery.includeKey("sensor")
+            
             var sensors: [RoomSensor]?
             var devices: [SwitchedDevice]?
             
@@ -169,7 +171,9 @@ class DataController: NSObject {
         dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ) ) {
             
             do {
-                try RoomSensor.fetchAll(self.sensors)
+                let deviceSensors = self.devices.filter({ return $0.sensor != nil }).map({ return $0.sensor!})
+                let sensorObjects = self.sensors + deviceSensors
+                try RoomSensor.fetchAll(sensorObjects)
             } catch {
                 print("Parse fetch error: \(error)")
             }
@@ -186,23 +190,22 @@ class DataController: NSObject {
         }
     }
     
-    private func decidersForDevice( device:SwitchedDevice ) -> [DecisionMakerProtocol] {
+    private func decidersForDevice(device: SwitchedDevice) -> [DecisionMakerProtocol] {
         
         guard enableAutoMode && device.online else { return [] }
         
-        var array = [DecisionMakerProtocol]()
-        let types = device.deciderClasses
-        
-        if types.contains("BeaconDecider") {
-            let beacon = BeaconDecider( locationController: locationController )
-            array.append( beacon )
+        return device.deciderClasses.map() {
+            
+            switch $0 {
+                case "BeaconDecider":
+                    return BeaconDecider(locationController: locationController)
+                case "GeofenceDecider":
+                    return  GeofenceDecider(locationController: locationController)
+                case "SensorDecider":
+                    return SensorDecider(sensor: device.sensor!)
+            default:
+                fatalError("unknown decider!")
+            }
         }
-        
-        if types.contains("GeofenceDecider") {
-            let geofence = GeofenceDecider( locationController: locationController )
-            array.append( geofence )
-        }
-                
-        return array
     }
 }

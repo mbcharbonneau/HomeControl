@@ -142,7 +142,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         super.viewDidAppear(animated)
 
         updateDataTimer?.invalidate()
-        updateDataTimer = NSTimer.scheduledTimerWithTimeInterval(60.0, target:self, selector:Selector("refreshDataSource:"), userInfo:nil, repeats:true)
+        updateDataTimer = NSTimer.scheduledTimerWithTimeInterval(30.0, target:self, selector:Selector("refreshDataSource:"), userInfo:nil, repeats:true)
         updateDataTimer?.fire()
         
         updateCellsTimer?.invalidate()
