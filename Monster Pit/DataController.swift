@@ -15,6 +15,8 @@ protocol DataControllerDelegate: class {
     func dataController(controller: DataController, toggledDevice: SwitchedDevice)
 }
 
+typealias RefreshCompletion = (Bool, ErrorType?) -> Void
+
 class DataController: NSObject {
     
     // MARK: DataController
@@ -50,12 +52,12 @@ class DataController: NSObject {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.ForceEvaluationNotification, object: nil)
     }
     
-    func refresh() {
+    func refresh(completion: RefreshCompletion?) {
 
         if sensors.isEmpty || devices.isEmpty {
-            reloadData()
+            reloadData(completion)
         } else {
-            refreshSensors()
+            refreshSensors(completion)
         }
     }
     
@@ -123,7 +125,7 @@ class DataController: NSObject {
     private let locationController = LocationController()
     private let operationQueue = NSOperationQueue()
     
-    private func reloadData() {
+    private func reloadData(completion: RefreshCompletion?) {
         
         dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ) ) {
             
@@ -161,12 +163,16 @@ class DataController: NSObject {
                     self.delegate?.dataControllerReloadedData(self)
                     
                     NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
+                   
+                    if let handler = completion {
+                        handler(true, nil)
+                    }
                 }
             }
         }
     }
     
-    private func refreshSensors() {
+    private func refreshSensors(completion: RefreshCompletion?) {
 
         dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ) ) {
             
@@ -186,6 +192,10 @@ class DataController: NSObject {
                 self.delegate?.dataControllerRefreshedSensors(self)
 
                 NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
+                
+                if let handler = completion {
+                    handler(true, nil)
+                }
             }
         }
     }

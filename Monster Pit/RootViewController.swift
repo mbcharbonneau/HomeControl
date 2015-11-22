@@ -12,6 +12,8 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     // MARK: RootViewController
     
+    let dataController = DataController()
+    
     @IBAction func toggleDeviceOnOff(sender: UISwitch) {
         
         let device = dataController.devices[sender.tag]
@@ -41,7 +43,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     func refreshDataSource(timer: NSTimer) {
         
-        dataController.refresh()
+        dataController.refresh(nil)
     }
     
     func refreshCellLabels(timer: NSTimer) {
@@ -112,7 +114,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     // MARK: RootViewController Private
     
-    private let dataController = DataController()
     private let sensorCellIdentifier = "SensorCell"
     private let deviceCellIdentifier = "DeviceCell"
     private let footerIdentifier = "Footer"

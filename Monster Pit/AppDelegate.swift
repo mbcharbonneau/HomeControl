@@ -21,8 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Parse.setApplicationId( Configuration.Parse.AppID, clientKey:Configuration.Parse.ClientKey )
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Badge, .Alert, .Sound], categories: nil))
+        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
         return true
+    }
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        print("Performing background fetch...")
+
+        guard let navigationController = window?.rootViewController as? UINavigationController else { return completionHandler(.Failed) }
+        guard let viewController = navigationController.topViewController as? RootViewController else { return completionHandler(.Failed) }
+        let dataController = viewController.dataController
+
+        dataController.refresh() { (success, error) in
+            completionHandler(success ? .NewData : .Failed)
+            print("Background fetch complete.")
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
