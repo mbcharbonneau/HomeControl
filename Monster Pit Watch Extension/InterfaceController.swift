@@ -1,9 +1,9 @@
 //
 //  InterfaceController.swift
-//  Monster Pit WatchKit Extension
+//  Monster Pit Watch Extension
 //
-//  Created by mbcharbonneau on 7/20/15.
-//  Copyright (c) 2015 Downtown Software House. All rights reserved.
+//  Created by Marc Charbonneau on 11/22/15.
+//  Copyright © 2015 Downtown Software House. All rights reserved.
 //
 
 import WatchKit
