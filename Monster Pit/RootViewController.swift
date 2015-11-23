@@ -74,44 +74,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
-    func scheduleNotifications(timer: NSTimer) {
-        
-        let notification = UILocalNotification()
-        
-        notification.fireDate = NSDate()
-        notification.soundName = UILocalNotificationDefaultSoundName;
-        
-        switch notificationDevices.count {
-        case 1:
-            let device = notificationDevices[0]
-            let action = device.on ? "on" : "off"
-            notification.alertBody = "I turned \(action) \(device.name)."
-        default:
-            let turnedOn = notificationDevices.filter({ $0.on == true }).count
-            let turnedOff = notificationDevices.filter({ $0.on == false }).count
-            var actionString = ""
-            
-            if turnedOn > 0 {
-                actionString += "I turned on \(turnedOn) devices. "
-            }
-            if turnedOff > 0 {
-                actionString += "I turned off \(turnedOff) devices. "
-            }
-            
-            notification.alertBody = actionString
-        }
-        
-        UIApplication.sharedApplication().scheduleLocalNotification( notification )
-
-        if let task = self.notificationTask {
-            UIApplication.sharedApplication().endBackgroundTask(task)
-        }
-        
-        notificationTask = nil
-        notificationCoalescingTimer = nil
-        notificationDevices.removeAll(keepCapacity: false)
-    }
-    
     // MARK: RootViewController Private
     
     private let sensorCellIdentifier = "SensorCell"
@@ -119,9 +81,6 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     private let footerIdentifier = "Footer"
     private var updateCellsTimer: NSTimer?
     private var updateDataTimer: NSTimer?
-    private var notificationCoalescingTimer: NSTimer?
-    private var notificationDevices = [SwitchedDevice]()
-    private var notificationTask: UIBackgroundTaskIdentifier?
     private weak var updateLabel: UILabel?
     
     @IBOutlet private weak var toggleAutoButton: SlidingToggleButton? {
@@ -258,21 +217,8 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     func dataController(controller: DataController, toggledDevice: SwitchedDevice) {
         
-        if let index = dataController.devices.indexOf(toggledDevice) {
-            let path = NSIndexPath(forItem: index, inSection: 1)
-            collectionView?.reloadItemsAtIndexPaths([path])
-        }
-
-        // If there are multiple notifications, group them into one (also it
-        // takes several seconds for the switches to receive the command so 
-        // there's no sense in showing a notification immediately).
-
-        notificationCoalescingTimer?.invalidate()
-        notificationDevices.append(toggledDevice)
-        notificationCoalescingTimer = NSTimer(timeInterval: 5.0, target: self, selector: Selector("scheduleNotifications:"), userInfo: nil, repeats: false)
-        NSRunLoop.currentRunLoop().addTimer(notificationCoalescingTimer!, forMode: NSRunLoopCommonModes)
-        notificationTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler() {
-            self.notificationCoalescingTimer?.fire()
-        }
+        guard let index = dataController.devices.indexOf(toggledDevice) else { return }
+        let path = NSIndexPath(forItem: index, inSection: 1)
+        collectionView?.reloadItemsAtIndexPaths([path])
     }
 }

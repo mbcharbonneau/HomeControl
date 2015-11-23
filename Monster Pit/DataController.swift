@@ -89,7 +89,10 @@ class DataController: NSObject {
             }
             return
         }
-                
+        
+        var switchedOn = [SwitchedDevice]()
+        var switchedOff = [SwitchedDevice]()
+        
         outerLoop: for device in devices {
 
             if device.deciders.count == 0 || !device.online {
@@ -102,21 +105,28 @@ class DataController: NSObject {
                 
                 print( "\t\(decider.name) wants \(device.name) to be \(decider.state)." );
                 
-                if ( decider.state == State.Unknown ) {
-                    continue outerLoop
-                }
-                
+                guard decider.state != .Unknown else { continue outerLoop }
                 let decision = decider.state == State.On;
                 turnOn = turnOn && decision;
             }
 
             if turnOn && !device.on {
                 switchDevice(device, turnOn: true)
+                switchedOn.append(device)
             } else if !turnOn && device.on {
                 switchDevice(device, turnOn: false)
+                switchedOff.append(device)
             }
         }
-                
+        
+        if switchedOn.count > 0 {
+            scheduleNotification(switchedOn, command: .TurnOn)
+        }
+        
+        if switchedOff.count > 0 {
+            scheduleNotification(switchedOff, command: .TurnOff)
+        }
+        
         print("Done!")
     }
     
@@ -217,5 +227,24 @@ class DataController: NSObject {
                 fatalError("unknown decider!")
             }
         }
+    }
+    
+    private func scheduleNotification(devices: [SwitchedDevice], command: DeviceCommand) {
+        
+        let notification = UILocalNotification()
+        let actionName = command.commandString().lowercaseString
+        
+        notification.fireDate = NSDate()
+        notification.soundName = UILocalNotificationDefaultSoundName;
+
+        switch devices.count {
+        case 1:
+            let device = devices.first!
+            notification.alertBody = "I turned \(actionName) \(device.name)."
+        default:
+            notification.alertBody = "I turned \(actionName) \(devices.count) devices."
+        }
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
 }
