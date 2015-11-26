@@ -10,5 +10,7 @@ import Foundation
 
 struct Constants {
     static let ForceEvaluationNotification = "ForceEvaluationNotification"
+    static let MessagesChangedNotification = "MessagesChangedNotification"
     static let EnableAutoModeDefaultsKey = "EnableAutoModeDefaultsKey"
+    static let LogMessagesDefaultsKey = "LogMessagesDefaultsKey"
 }

@@ -87,7 +87,7 @@ class DeviceOperation: NSOperation {
         commandTask = session.dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error: NSError?) in
             
             guard error == nil else {
-                print("Command finished with error: \(error)")
+                LogController.sharedController.log("Command finished with error: \(error)")
                 self.state = .Finished
                 return
             }
@@ -95,16 +95,16 @@ class DeviceOperation: NSOperation {
             self.device.on = self.command == .TurnOn
             self.device.saveInBackgroundWithBlock() { (success, parseError) in
                 if parseError != nil {
-                    print("Parse save error: \(parseError)")
+                    LogController.sharedController.log("Parse save error: \(parseError)")
                 } else {
-                    print("Success! \(self.device.name) is now \(commandString.lowercaseString).")
+                    LogController.sharedController.log("Success! \(self.device.name) is now \(commandString.lowercaseString).")
                 }
                 
                 self.state = .Finished
             }
         }
         
-        print("Turning \(device.name) \(commandString.lowercaseString)...")
+        LogController.sharedController.log("Turning \(device.name) \(commandString.lowercaseString)...")
         commandTask?.resume()
     }
     

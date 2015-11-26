@@ -15,6 +15,10 @@
 		481913281B5DBFDD00C8DB14 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 481913271B5DBFDD00C8DB14 /* Images.xcassets */; };
 		4819132B1B5DBFDD00C8DB14 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 481913291B5DBFDD00C8DB14 /* LaunchScreen.xib */; };
 		481913691B5EDA1000C8DB14 /* RoomSensorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */; };
+		485CBA0A1C078D4E001F5747 /* LogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485CBA091C078D4E001F5747 /* LogController.swift */; };
+		485CBA0C1C079214001F5747 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485CBA0B1C079214001F5747 /* LogViewController.swift */; };
+		485CBA0E1C079512001F5747 /* LogMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485CBA0D1C079512001F5747 /* LogMessage.swift */; };
+		485CBA101C07968E001F5747 /* LogMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485CBA0F1C07968E001F5747 /* LogMessageCell.swift */; };
 		486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B0B0D1B5DE6E600943145 /* RoomSensor.swift */; };
 		486B0B101B5DE8A500943145 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B0B0F1B5DE8A500943145 /* DataController.swift */; };
 		489477901B619A1D00FBFB67 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894778F1B619A1D00FBFB67 /* libstdc++.6.dylib */; };
@@ -114,6 +118,10 @@
 		481913351B5DBFDD00C8DB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		481913361B5DBFDD00C8DB14 /* Monster_PitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster_PitTests.swift; sourceTree = "<group>"; };
 		481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomSensorCell.swift; sourceTree = "<group>"; };
+		485CBA091C078D4E001F5747 /* LogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogController.swift; sourceTree = "<group>"; };
+		485CBA0B1C079214001F5747 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		485CBA0D1C079512001F5747 /* LogMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogMessage.swift; sourceTree = "<group>"; };
+		485CBA0F1C07968E001F5747 /* LogMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogMessageCell.swift; sourceTree = "<group>"; };
 		486B0B0D1B5DE6E600943145 /* RoomSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomSensor.swift; sourceTree = "<group>"; };
 		486B0B0F1B5DE8A500943145 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		486B0B111B5DF5D600943145 /* Monster Pit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Monster Pit.entitlements"; sourceTree = "<group>"; };
@@ -185,6 +193,7 @@
 			children = (
 				481913681B5EDA1000C8DB14 /* RoomSensorCell.swift */,
 				4817BAE81B629C3B0092E6C8 /* DeviceCell.swift */,
+				485CBA0F1C07968E001F5747 /* LogMessageCell.swift */,
 				48A5FC2F1B6420FF009D0893 /* StatusIndicatorView.swift */,
 				48A5FC431B6578A9009D0893 /* SlidingToggleButton.swift */,
 			);
@@ -201,6 +210,7 @@
 				48A5FC351B642863009D0893 /* GeofenceDecider.swift */,
 				48A5FC371B6428C0009D0893 /* BeaconDecider.swift */,
 				48A5FC391B64290E009D0893 /* SensorDecider.swift */,
+				485CBA0D1C079512001F5747 /* LogMessage.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -306,6 +316,8 @@
 				481913221B5DBFDD00C8DB14 /* RootViewController.swift */,
 				486B0B0F1B5DE8A500943145 /* DataController.swift */,
 				48A5FC3D1B6436E7009D0893 /* LocationController.swift */,
+				485CBA091C078D4E001F5747 /* LogController.swift */,
+				485CBA0B1C079214001F5747 /* LogViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -416,6 +428,7 @@
 					};
 					48DA0E071C029A2600FD7207 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = Y97C7YWSBK;
 					};
 				};
 			};
@@ -477,19 +490,23 @@
 			files = (
 				48A5FC441B6578A9009D0893 /* SlidingToggleButton.swift in Sources */,
 				48A5FC3E1B6436E7009D0893 /* LocationController.swift in Sources */,
+				485CBA0A1C078D4E001F5747 /* LogController.swift in Sources */,
 				489477A61B619A7800FBFB67 /* Configuration.swift in Sources */,
 				481913231B5DBFDD00C8DB14 /* RootViewController.swift in Sources */,
 				48A5FC381B6428C0009D0893 /* BeaconDecider.swift in Sources */,
+				485CBA0E1C079512001F5747 /* LogMessage.swift in Sources */,
 				48A5FC301B6420FF009D0893 /* StatusIndicatorView.swift in Sources */,
 				4817BAE71B6298D20092E6C8 /* SwitchedDevice.swift in Sources */,
 				481913691B5EDA1000C8DB14 /* RoomSensorCell.swift in Sources */,
 				486B0B101B5DE8A500943145 /* DataController.swift in Sources */,
 				4817BAE91B629C3B0092E6C8 /* DeviceCell.swift in Sources */,
+				485CBA0C1C079214001F5747 /* LogViewController.swift in Sources */,
 				48A5FC3A1B64290E009D0893 /* SensorDecider.swift in Sources */,
 				48A5FC321B642489009D0893 /* DecisionMakerProtocol.swift in Sources */,
 				48A5FC361B642863009D0893 /* GeofenceDecider.swift in Sources */,
 				481913211B5DBFDD00C8DB14 /* AppDelegate.swift in Sources */,
 				48A5FC401B645B8F009D0893 /* Extensions.swift in Sources */,
+				485CBA101C07968E001F5747 /* LogMessageCell.swift in Sources */,
 				48DA0DF91C01250D00FD7207 /* DeviceOperation.swift in Sources */,
 				486B0B0E1B5DE6E600943145 /* RoomSensor.swift in Sources */,
 				48A5FC421B646297009D0893 /* Constants.swift in Sources */,
@@ -668,6 +685,7 @@
 		48DA0E181C029A2600FD7207 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "Monster Pit Watch Extension/Info.plist";
@@ -684,6 +702,7 @@
 		48DA0E191C029A2600FD7207 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Monster Pit Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DowntownSoftwareHouse.Monster-Pit.watchkitapp.watchkitextension";
@@ -761,6 +780,7 @@
 				48DA0E191C029A2600FD7207 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		48DA0E1B1C029A2600FD7207 /* Build configuration list for PBXNativeTarget "Monster Pit Watch" */ = {
 			isa = XCConfigurationList;
@@ -769,6 +789,7 @@
 				48DA0E1D1C029A2600FD7207 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

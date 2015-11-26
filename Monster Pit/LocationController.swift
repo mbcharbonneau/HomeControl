@@ -15,14 +15,14 @@ class LocationController: NSObject, CLLocationManagerDelegate {
     
     var beaconState = CLRegionState.Unknown {
         didSet {
-            print( "iBeacon state change: \(beaconState)" )
+            LogController.sharedController.log( "iBeacon state change: \(beaconState)" )
             NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
         }
     }
     
     var geofenceState = CLRegionState.Unknown {
         didSet {
-            print( "Geofence state change: \(geofenceState)" )
+            LogController.sharedController.log( "Geofence state change: \(geofenceState)" )
             NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
         }
     }
@@ -54,7 +54,7 @@ class LocationController: NSObject, CLLocationManagerDelegate {
                         self.beaconDebounceTimer?.fire()
                     }
                 }
-                print( "Debouncing iBeacon state change: \(nextBeaconState)" )
+                LogController.sharedController.log( "Debouncing iBeacon state change: \(nextBeaconState)" )
             }
         }
     }
@@ -72,7 +72,7 @@ class LocationController: NSObject, CLLocationManagerDelegate {
                         self.geofenceDebounceTimer?.fire()
                     }
                 }
-                print( "Debouncing Geofence state change: \(nextGeofenceState)" )
+                LogController.sharedController.log( "Debouncing Geofence state change: \(nextGeofenceState)" )
             }
         }
     }

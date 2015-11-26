@@ -79,10 +79,11 @@ class DataController: NSObject {
     
     func evaluateDeciders(notification: NSNotification) {
                 
-        print("Checking deciders...")
+        LogController.sharedController.log("Checking deciders...")
         
         guard operationQueue.operationCount == 0 else {
-            print("One or more devices are busy, postponing evaluation!")
+            
+            LogController.sharedController.log("One or more devices are busy, postponing evaluation!")
             let time = dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC)))
             dispatch_after(time, dispatch_get_main_queue()) { [weak self] in
                 self?.evaluateDeciders(notification)
@@ -103,8 +104,8 @@ class DataController: NSObject {
             
             for decider in device.deciders {
                 
-                print( "\t\(decider.name) wants \(device.name) to be \(decider.state)." );
-                
+                LogController.sharedController.log("\(decider.name) wants \(device.name) to be \(decider.state).")
+
                 guard decider.state != .Unknown else { continue outerLoop }
                 let decision = decider.state == State.On;
                 turnOn = turnOn && decision;
@@ -127,7 +128,7 @@ class DataController: NSObject {
             scheduleNotification(switchedOff, command: .TurnOff)
         }
         
-        print("Done!")
+        LogController.sharedController.log("Finished evaluation!")
     }
     
     // MARK: DataController Private
@@ -154,10 +155,10 @@ class DataController: NSObject {
                 sensors = try sensorQuery.findObjects() as? [RoomSensor]
                 devices = try deviceQuery.findObjects() as? [SwitchedDevice]
             } catch {
-                print("Parse fetch error: \(error)")
+                LogController.sharedController.log("Parse fetch error: \(error)")
             }
             
-            print("Reloaded all data sources.")
+            LogController.sharedController.log("Reloaded all data sources.")
             
             dispatch_async( dispatch_get_main_queue() ) {
                 
@@ -191,10 +192,10 @@ class DataController: NSObject {
                 let sensorObjects = self.sensors + deviceSensors
                 try RoomSensor.fetchAll(sensorObjects)
             } catch {
-                print("Parse fetch error: \(error)")
+                LogController.sharedController.log("Parse fetch error: \(error)")
             }
             
-            print("Refreshed sensors.")
+            LogController.sharedController.log("Refreshed sensors.")
             
             dispatch_async( dispatch_get_main_queue() ) {
 

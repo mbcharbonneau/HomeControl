@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bwr-GQ-8se">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -195,6 +194,11 @@
                                 </connections>
                             </view>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Logs" id="tkm-3I-ybk">
+                            <connections>
+                                <segue destination="AvM-US-s5h" kind="show" id="aTn-bA-1dT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="toggleAutoButton" destination="kGO-y2-5xS" id="n0n-v1-0eB"/>
@@ -203,6 +207,79 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="riR-Uz-lC4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="336" y="992"/>
+        </scene>
+        <!--Logs-->
+        <scene sceneID="uoE-Rk-wij">
+            <objects>
+                <tableViewController title="Logs" id="AvM-US-s5h" customClass="LogViewController" customModule="Monster_Pit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="mUV-DU-seb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LogMessageCell" id="boX-GP-aYn" customClass="LogMessageCell" customModule="Monster_Pit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="boX-GP-aYn" id="0gv-Wn-Xez">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="&lt;&lt; log message &gt;&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqI-fE-lcq">
+                                            <rect key="frame" x="18" y="8" width="564" height="17"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;&lt; date &gt;&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QO6-w4-86q">
+                                            <rect key="frame" x="18" y="25" width="63.5" height="10.5"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="QO6-w4-86q" firstAttribute="leading" secondItem="zqI-fE-lcq" secondAttribute="trailing" constant="10" id="4bS-Q0-gLn"/>
+                                        <constraint firstItem="QO6-w4-86q" firstAttribute="top" secondItem="zqI-fE-lcq" secondAttribute="top" id="HUY-Gk-Sec"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zqI-fE-lcq" secondAttribute="bottom" id="PcW-rB-OBQ"/>
+                                        <constraint firstItem="zqI-fE-lcq" firstAttribute="top" secondItem="0gv-Wn-Xez" secondAttribute="topMargin" id="XZj-zK-IhQ"/>
+                                        <constraint firstItem="zqI-fE-lcq" firstAttribute="leading" secondItem="0gv-Wn-Xez" secondAttribute="leadingMargin" constant="10" id="Y78-cT-o3f"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="QO6-w4-86q" secondAttribute="bottom" id="kb8-DS-wUs"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="QO6-w4-86q" secondAttribute="trailing" constant="10" id="rNi-7r-qzh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zqI-fE-lcq" secondAttribute="trailing" constant="365" id="u0d-Xn-wxt"/>
+                                        <constraint firstItem="QO6-w4-86q" firstAttribute="top" secondItem="zqI-fE-lcq" secondAttribute="bottom" id="u93-rc-rsU"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zqI-fE-lcq" secondAttribute="trailing" constant="10" id="zFc-ka-9k6"/>
+                                        <constraint firstItem="QO6-w4-86q" firstAttribute="leading" secondItem="0gv-Wn-Xez" secondAttribute="leadingMargin" constant="10" id="zZK-Lv-pXQ"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="PcW-rB-OBQ"/>
+                                            <exclude reference="u0d-Xn-wxt"/>
+                                            <exclude reference="4bS-Q0-gLn"/>
+                                            <exclude reference="HUY-Gk-Sec"/>
+                                            <exclude reference="rNi-7r-qzh"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="dateLabel" destination="QO6-w4-86q" id="ca5-bN-UJp"/>
+                                    <outlet property="messageLabel" destination="zqI-fE-lcq" id="ELB-qI-z1N"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="AvM-US-s5h" id="Ofn-CU-EaR"/>
+                            <outlet property="delegate" destination="AvM-US-s5h" id="z0F-7g-dpB"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ea1-HY-D6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1008" y="990"/>
         </scene>
     </scenes>
     <resources>
