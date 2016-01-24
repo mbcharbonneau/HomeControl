@@ -26,7 +26,7 @@ class LogController {
         print(logMessage.message)
         messages.insert(logMessage, atIndex: 0)
         if messages.count > 200 {
-            messages.removeRange(Range<Int>(start: 200, end: messages.count))
+            messages.removeRange(Range<Int>(start: 199, end: messages.count - 1))
         }
         NSNotificationCenter.defaultCenter().postNotificationName(Constants.MessagesChangedNotification, object: self)
         save()

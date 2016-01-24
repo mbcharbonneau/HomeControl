@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Badge, .Alert, .Sound], categories: nil))
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
-        LogController.sharedController.log("Application did finish launching.")
+        LogController.sharedController.log("Application finished launching.")
         
         return true
     }
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        LogController.sharedController.log("Application did enter background state.")
+        LogController.sharedController.log("Application entered background state.")
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        LogController.sharedController.log("Application did become action.")
+        LogController.sharedController.log("Application became action.")
     }
 
     func applicationWillTerminate(application: UIApplication) {
