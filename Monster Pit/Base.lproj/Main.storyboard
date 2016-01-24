@@ -178,7 +178,7 @@
                                 </connections>
                             </view>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Logs" id="tkm-3I-ybk">
+                        <barButtonItem key="rightBarButtonItem" image="Logs" id="tkm-3I-ybk">
                             <connections>
                                 <segue destination="AvM-US-s5h" kind="show" id="aTn-bA-1dT"/>
                             </connections>
@@ -263,5 +263,6 @@
     </scenes>
     <resources>
         <image name="AutoMode" width="32" height="32"/>
+        <image name="Logs" width="32" height="32"/>
     </resources>
 </document>
