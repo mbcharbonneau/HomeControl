@@ -8,7 +8,17 @@
 
 import Foundation
 
-class LogController {
+protocol LoggingObject {
+    func log(message: String) -> Void
+}
+
+extension LoggingObject {
+    func log(message: String) {
+        LogController.sharedController.log(message)
+    }
+}
+
+class LogController: LoggingObject {
     
     static let sharedController = LogController()
     
@@ -26,7 +36,7 @@ class LogController {
         print(logMessage.message)
         messages.insert(logMessage, atIndex: 0)
         if messages.count > 200 {
-            messages.removeRange(Range<Int>(start: 199, end: messages.count - 1))
+            messages.removeRange(Range<Int>(start: 199, end: messages.count))
         }
         NSNotificationCenter.defaultCenter().postNotificationName(Constants.MessagesChangedNotification, object: self)
         save()
