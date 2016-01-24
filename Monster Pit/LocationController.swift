@@ -28,18 +28,24 @@ class LocationController: NSObject, LoggingObject, CLLocationManagerDelegate {
     
     // MARK: LocationController
     
-    var beaconState = CLRegionState.Unknown {
+    private(set) var beaconState = CLRegionState.Unknown {
         didSet {
             log("iBeacon state change: \(beaconState)")
             NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
         }
     }
     
-    var geofenceState = CLRegionState.Unknown {
+    private(set) var geofenceState = CLRegionState.Unknown {
         didSet {
             log("Geofence state change: \(geofenceState)")
             NSNotificationCenter.defaultCenter().postNotificationName(Constants.ForceEvaluationNotification, object: self)
         }
+    }
+    
+    func requestLocationUpdate() {
+        locationManager.requestLocation()
+        locationManager.requestStateForRegion(beaconRegion)
+        locationManager.requestStateForRegion(geofenceRegion)
     }
     
     // MARK: LocationController Private
@@ -47,6 +53,14 @@ class LocationController: NSObject, LoggingObject, CLLocationManagerDelegate {
     private let locationManager: CLLocationManager
     private let beaconRegion: CLBeaconRegion
     private let geofenceRegion: CLCircularRegion
+    
+    private func beginRegionMonitoring() {
+        locationManager.startRangingBeaconsInRegion(beaconRegion)
+        locationManager.startMonitoringForRegion(beaconRegion)
+        locationManager.startMonitoringForRegion(geofenceRegion)
+        locationManager.requestStateForRegion(geofenceRegion)
+        locationManager.requestStateForRegion(beaconRegion)
+    }
     
     // MARK: NSObject
     
@@ -57,6 +71,7 @@ class LocationController: NSObject, LoggingObject, CLLocationManagerDelegate {
         let radius = 50.0
         
         locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID, major: 0, minor: 0, identifier: "beacon")
         geofenceRegion = CLCircularRegion(center: location, radius: radius, identifier: "geofence")
         
@@ -69,19 +84,22 @@ class LocationController: NSObject, LoggingObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.startRangingBeaconsInRegion( beaconRegion )
-        locationManager.startMonitoringForRegion( beaconRegion )
-        locationManager.startMonitoringForRegion( geofenceRegion )
-        locationManager.requestStateForRegion( geofenceRegion )
+        
+        beginRegionMonitoring()
     }
     
     // MARK: CLLocationManagerDelegate
     
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last!
+        let coordinate = location.coordinate
+        log("Found location.")
+        geofenceState = geofenceRegion.containsCoordinate(coordinate) ? .Inside : .Outside
+    }
+    
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        locationManager.startRangingBeaconsInRegion( beaconRegion )
-        locationManager.startMonitoringForRegion( beaconRegion )
-        locationManager.startMonitoringForRegion( geofenceRegion )
-        locationManager.requestStateForRegion( geofenceRegion )
+        log("Changed location authorization status.")
+        beginRegionMonitoring()
     }
     
     func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
@@ -99,5 +117,9 @@ class LocationController: NSObject, LoggingObject, CLLocationManagerDelegate {
         guard let beacon = beacons.first else { return }
         log("iBeacon is now \(beacon.proximity)")
         return
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        log("Location manager error: \(error).")
     }
 }

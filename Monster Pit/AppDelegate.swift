@@ -10,9 +10,15 @@ import UIKit
 import Parse
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, LoggingObject, UIApplicationDelegate {
 
     var window: UIWindow?
+    var rootViewController: RootViewController? {
+        get {
+            guard let navigationController = window?.rootViewController as? UINavigationController else { return nil }
+            return navigationController.topViewController as? RootViewController
+        }
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -23,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Badge, .Alert, .Sound], categories: nil))
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
-        LogController.sharedController.log("Application finished launching.")
+        log("Application finished launching.")
         
         return true
     }
@@ -32,13 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LogController.sharedController.log("Performing background fetch...")
 
-        guard let navigationController = window?.rootViewController as? UINavigationController else { return completionHandler(.Failed) }
-        guard let viewController = navigationController.topViewController as? RootViewController else { return completionHandler(.Failed) }
-        let dataController = viewController.dataController
+        guard let dataController = rootViewController?.dataController else { return completionHandler(.Failed) }
 
         dataController.refresh() { (success, error) in
             completionHandler(success ? .NewData : .Failed)
-            LogController.sharedController.log("Background fetch complete.")
+            self.log("Background fetch complete.")
         }
     }
 
@@ -48,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        LogController.sharedController.log("Application entered background state.")
+        log("Application entered background state.")
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -56,7 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        LogController.sharedController.log("Application became action.")
+        log("Application became action.")
+        if let dataController = rootViewController?.dataController {
+            dataController.locationController.requestLocationUpdate()
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {

@@ -21,9 +21,10 @@ class DataController: NSObject {
     
     // MARK: DataController
     
-    var sensors = [RoomSensor]()
-    var devices = [SwitchedDevice]()
-    var lastUpdate: NSDate?
+    let locationController = LocationController()
+    private(set) var sensors = [RoomSensor]()
+    private(set) var devices = [SwitchedDevice]()
+    private(set) var lastUpdate: NSDate?
     weak var delegate: DataControllerDelegate?
     var enableAutoMode: Bool {
         didSet {
@@ -133,7 +134,6 @@ class DataController: NSObject {
     
     // MARK: DataController Private
     
-    private let locationController = LocationController()
     private let operationQueue = NSOperationQueue()
     
     private func reloadData(completion: RefreshCompletion?) {
