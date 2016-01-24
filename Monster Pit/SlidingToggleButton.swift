@@ -14,10 +14,12 @@ class SlidingToggleButton: UIControl {
     
     var on: Bool = true {
         didSet {
-            titleLabel?.textColor = on ? tintColor : UIColor.lightGrayColor()
+            let color = on ? tintColor : UIColor.lightGrayColor()
+            titleLabel?.textColor = color
             actionLabel?.text = on ? offActionMessage : onActionMessage
-            innerView?.layer.borderColor = titleLabel?.textColor.CGColor
-            leftView?.backgroundColor = titleLabel?.textColor
+            innerView?.layer.borderColor = color.CGColor
+            leftView?.backgroundColor = color
+            imageView?.tintColor = color
             sendActionsForControlEvents(UIControlEvents.ValueChanged)
         }
     }
@@ -34,7 +36,7 @@ class SlidingToggleButton: UIControl {
     
     @IBInspectable var image: UIImage? {
         get { return imageView?.image }
-        set { imageView?.image = newValue }
+        set { imageView?.image = newValue?.imageWithRenderingMode(.AlwaysTemplate) }
     }
     
     func handlePan(gestureRecognizer: UIPanGestureRecognizer) {
@@ -88,6 +90,7 @@ class SlidingToggleButton: UIControl {
         
         imageView = UIImageView()
         imageView?.translatesAutoresizingMaskIntoConstraints = false
+        imageView?.tintColor = tintColor
         
         leftView = UIView()
         leftView?.translatesAutoresizingMaskIntoConstraints = false
@@ -111,12 +114,14 @@ class SlidingToggleButton: UIControl {
         innerView?.addSubview(actionLabel!)
         innerView?.addGestureRecognizer(pan)
 
-        let metrics: [String: CGFloat] = ["imageSize": bounds.height, "leftViewWidth": leftViewWidth, "space": elementSpacing, "hidden": hiddenSpacing]
+        let metrics: [String: CGFloat] = ["leftViewWidth": leftViewWidth, "space": elementSpacing, "hidden": hiddenSpacing]
         let views: [String: UIView] = ["titleLabel": titleLabel!, "imageView": imageView!, "leftView": leftView!, "actionLabel": actionLabel!]
         
-        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[actionLabel(hidden)]-(space)-[leftView(leftViewWidth)]-(space)-[imageView(imageSize)]-(space)-[titleLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
+        imageView?.addConstraint(NSLayoutConstraint(item: imageView!, attribute: .Width, relatedBy: .Equal, toItem: imageView!, attribute: .Height, multiplier: 1.0, constant: 0.0))
+        
+        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[actionLabel(hidden)]-(space)-[leftView(leftViewWidth)]-(space)-[imageView]-(space)-[titleLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
         innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[titleLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
-        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[imageView(imageSize)]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
+        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(space)-[imageView]-(space)-|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
         innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[leftView]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
         innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[actionLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
 
