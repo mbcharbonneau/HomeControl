@@ -61,13 +61,13 @@ class AppDelegate: UIResponder, LoggingObject, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        log("Application became action.")
+        log("Application became active.")
         if let dataController = rootViewController?.dataController {
             dataController.locationController.requestLocationUpdate()
         }
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        log("Application is terminating.")
     }
 }
