@@ -65,7 +65,7 @@ class RoomSensorCell: UICollectionViewCell {
         
         if let date = lastUpdate {
             let string = formatter.stringFromDate( date, toDate:NSDate() )!
-            lastUpdatedLabel?.text = "Updated \(string) ago"
+            lastUpdatedLabel?.text = "Data is \(string) old"
         } else {
             lastUpdatedLabel?.text = ""
         }

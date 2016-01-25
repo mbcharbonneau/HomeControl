@@ -41,7 +41,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         dataController.enableAutoMode = sender.on
     }
     
-    func refreshDataSource(timer: NSTimer) {
+    @IBAction func refreshDataSource(sender: AnyObject?) {
         
         dataController.refresh(nil)
     }
@@ -81,6 +81,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     private let footerIdentifier = "Footer"
     private var updateCellsTimer: NSTimer?
     private var updateDataTimer: NSTimer?
+    private var refreshControl: UIRefreshControl?
     private weak var updateLabel: UILabel?
     
     @IBOutlet private weak var toggleAutoButton: SlidingToggleButton? {
@@ -94,6 +95,10 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: "refreshDataSource:", forControlEvents: .ValueChanged)
+        
+        collectionView?.addSubview(refreshControl!)
         collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         dataController.delegate = self
     }
@@ -102,7 +107,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         super.viewDidAppear(animated)
 
         updateDataTimer?.invalidate()
-        updateDataTimer = NSTimer.scheduledTimerWithTimeInterval(30.0, target:self, selector:Selector("refreshDataSource:"), userInfo:nil, repeats:true)
+        updateDataTimer = NSTimer.scheduledTimerWithTimeInterval(60.0, target:self, selector:Selector("refreshDataSource:"), userInfo:nil, repeats:true)
         updateDataTimer?.fire()
         
         updateCellsTimer?.invalidate()
@@ -208,10 +213,12 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
     // MARK: DataControllerDelegate
     
     func dataControllerReloadedData(controller: DataController) {
+        refreshControl?.endRefreshing()
         collectionView?.reloadData()
     }
 
     func dataControllerRefreshedSensors(controller: DataController) {
+        refreshControl?.endRefreshing()
         collectionView?.reloadSections(NSIndexSet(index: 0))
     }
     
