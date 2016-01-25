@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, LoggingObject, UIApplicationDelegate {
 
     func applicationDidEnterBackground(application: UIApplication) {
         log("Application entered background state.")
+        LogController.sharedController.archiveMessages()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {

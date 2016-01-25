@@ -19,31 +19,43 @@ extension LoggingObject {
 }
 
 class LogController: LoggingObject {
+
+    // MARK: LogController
     
     static let sharedController = LogController()
     
-    var messages = [LogMessage]()
+    private(set) var messages = [LogMessage]()
     
     init() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let array = defaults.arrayForKey(Constants.LogMessagesDefaultsKey) as? [[String: AnyObject]] {
-            let logs = array.map({ return LogMessage($0)! })
-            messages.appendContentsOf(logs)
-        }
+        load()
     }
     
+    func log(message: String) {
+        log(LogMessage(message))
+    }
+
     func log(logMessage: LogMessage) {
         print(logMessage.message)
         messages.insert(logMessage, atIndex: 0)
-        if messages.count > 200 {
-            messages.removeRange(Range<Int>(start: 199, end: messages.count))
+        if messages.count > 300 {
+            messages.removeRange(Range<Int>(start: 299, end: messages.count))
         }
         NSNotificationCenter.defaultCenter().postNotificationName(Constants.MessagesChangedNotification, object: self)
         save()
     }
     
-    func log(message: String) {
-        log(LogMessage(message))
+    func archiveMessages() {
+        load()
+        NSNotificationCenter.defaultCenter().postNotificationName(Constants.MessagesChangedNotification, object: self)
+    }
+    
+    // MARK: LogController Private
+    
+    private func load() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let array = defaults.arrayForKey(Constants.LogMessagesDefaultsKey) as? [[String: AnyObject]] {
+            messages = array.map({ return LogMessage($0)! })
+        }
     }
     
     private func save() {

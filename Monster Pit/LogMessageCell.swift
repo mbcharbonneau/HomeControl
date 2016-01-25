@@ -27,5 +27,7 @@ class LogMessageCell: UITableViewCell {
     func configureWithLogMessage(logMessage: LogMessage) {
         messageLabel?.text = logMessage.message
         dateLabel?.text = LogMessageCell.dateFormatter.stringFromDate(logMessage.date)
+        messageLabel?.textColor = logMessage.archived ? UIColor.darkGrayColor() : UIColor.blackColor()
+        backgroundColor = logMessage.archived ? UIColor(white: 0.96, alpha: 1.0) : UIColor.whiteColor()
     }
 }

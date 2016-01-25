@@ -121,7 +121,7 @@ class SlidingToggleButton: UIControl {
         
         innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[actionLabel(hidden)]-(space)-[leftView(leftViewWidth)]-(space)-[imageView]-(space)-[titleLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
         innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[titleLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
-        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(space)-[imageView]-(space)-|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
+        innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(2)-[imageView]-(2)-|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
         innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[leftView]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
         innerView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[actionLabel]|", options: NSLayoutFormatOptions(), metrics: metrics, views: views))
 
