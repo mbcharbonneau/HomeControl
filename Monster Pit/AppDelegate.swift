@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, LoggingObject, UIApplicationDelegate {
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Badge, .Alert, .Sound], categories: nil))
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
+        UINavigationBar.appearance().tintColor = Configuration.Colors.Blue
+        SlidingToggleButton.appearance().tintColor = Configuration.Colors.Blue
+        
         log("Application finished launching.")
         
         return true

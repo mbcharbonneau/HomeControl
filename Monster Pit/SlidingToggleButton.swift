@@ -131,6 +131,13 @@ class SlidingToggleButton: UIControl {
     
     // MARK: UIView
     
+    override func tintColorDidChange() {
+        super.tintColorDidChange()
+        titleLabel?.textColor = tintColor
+        imageView?.tintColor = tintColor
+        leftView?.backgroundColor = tintColor
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()

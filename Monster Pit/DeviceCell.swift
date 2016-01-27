@@ -61,4 +61,9 @@ class DeviceCell: UICollectionViewCell {
         super.prepareForReuse()
         device = nil
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        deviceSwitch?.onTintColor = Configuration.Colors.Blue
+    }
 }

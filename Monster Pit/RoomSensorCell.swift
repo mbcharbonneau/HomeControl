@@ -21,7 +21,7 @@ class RoomSensorCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
         
-        backgroundColor = UIColor(red: 231.0/255.0, green: 55.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+        backgroundColor = Configuration.Colors.Red
         layer.cornerRadius = 6.0
     }
     

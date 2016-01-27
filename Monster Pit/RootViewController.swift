@@ -180,7 +180,7 @@ class RootViewController: UICollectionViewController, UICollectionViewDelegateFl
         switch indexPath.section {
         case 0:
             let width = ( collectionView.frame.size.width - layout.minimumInteritemSpacing - margins ) / 2.0
-            return CGSizeMake( width, width * 0.8 )
+            return CGSizeMake( width, width * 0.85 )
         case 1:
             return CGSizeMake( collectionView.frame.size.width - margins, 60.0 )
         default:
