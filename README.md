@@ -1,7 +1,7 @@
-# MonsterPit
-Welcome to the Monster Pit!
+# Home Control
+Welcome home!
 
-Monster Pit is home automation app for iOS, built in Swift. You probably won't have much luck simply forking this project for your own use. There's a lot going on, and it's all built for my own custom hardware and room layout!
+Home Control is home automation app for iOS, built in Swift. You probably won't have much luck simply forking this project for your own use. There's a lot going on, and it's all built for my own custom hardware and room layout!
 
 ![Screenshot](http://mbcharbonneau.com/files/MonsterPit.png)
 
